@@ -59,6 +59,12 @@
   }
   .selectMenu {
     width: 100%;
-    gap: 7px;
+    gap: 0px;
+  }
+  .panel {
+    margin-top: -12px;
+  }
+  .nextPrev {
+    padding: 7px;
   }
 }  
