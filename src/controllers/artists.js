@@ -1,3 +1,18 @@
+const fetchSuggestions = async (token, query) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        const data = await response.json();
+        // Extract relevant artist information from the response
+        const artists = data.artists?.items || [];
+        return artists;
+    } catch (error) {
+        console.error('Error fetching artist suggestions:', error);
+    }
+};
+
 const getArtists = async (token, artistName) => {
     try {
         const result = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`, {
@@ -37,4 +52,4 @@ const getTopSongs = async (token, artistID) => {
     }
 }
 
-export { getArtists, getTopSongs }
+export { getArtists, getTopSongs, fetchSuggestions }

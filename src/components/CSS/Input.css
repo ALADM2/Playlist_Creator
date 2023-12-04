@@ -1,4 +1,37 @@
 .inputDiv{
     display: flex;
+    justify-content: center;
     gap: 10px;
+    width: 100%;
+}
+
+.inputDiv>div{
+    width: 190%;
+}
+
+.inputDiv>button{
+    height: fit-content;
+}
+
+.inputDiv>div>ul{
+    position: absolute;
+    width: 300px;
+    overflow-y: auto; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    z-index: 1;  
+}
+
+.inputDiv>div>ul::-webkit-scrollbar{
+    display: none;
+}
+
+.inputDiv>div>ul>li{
+    padding: 10px;
+}
+
+.inputDiv>div>ul>li:hover{
+    background: #ccc;
+    cursor: pointer;
 }

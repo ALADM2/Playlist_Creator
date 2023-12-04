@@ -15,7 +15,6 @@ const getDevices = async (token) => {
 
 const play = async (token, songURI, device) => {
     try {
-        console.log(songURI)
         const result = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
             method: 'PUT',
             headers: {
