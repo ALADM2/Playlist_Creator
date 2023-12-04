@@ -4,7 +4,7 @@ import Input from './Input'
 import { play, playPlaylist, pause, next, previous } from '../controllers/player'
 import { TokenContext } from '../contexts/login'
 import InfoPanel from './InfoPanel'
-import './CSS/mainPage.css'
+import './CSS/MainPage.css'
 
 const MainPage = () => {
     const [topSongs, setTopSongs] = useState();
