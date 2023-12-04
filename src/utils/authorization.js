@@ -21,7 +21,8 @@ export const getAuth = async () => {
 
     const requestAuth = (codeVerifier, codeChallenge) => {
         const clientId = '4e3f37f14bf7476298ed0d9971c5d92d';
-        const redirectUri =
+        console.log()
+        const redirectUri = import.meta.env.MODE
             import.meta.env.MODE === 'development'
                 ? 'http://localhost:5173/mainpage'
                 : import.meta.env.VITE_REACT_APP_REDIRECT;
