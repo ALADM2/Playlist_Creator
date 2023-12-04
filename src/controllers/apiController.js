@@ -1,9 +1,8 @@
 const getToken = async (codeVerifier, code) => {
     const clientID = '4e3f37f14bf7476298ed0d9971c5d92d';
-    const redirectUri =
-        import.meta.env.MODE === 'development'
-            ? 'http://localhost:5173/mainpage'
-            : import.meta.env.VITE_REACT_APP_REDIRECT;
+    const redirectUri = import.meta.env.MODE === 'development'
+        ? 'http://localhost:5173/mainpage'
+        : import.meta.env.VITE_REDIRECT;
 
     try {
         const res = await fetch('https://accounts.spotify.com/api/token', {
