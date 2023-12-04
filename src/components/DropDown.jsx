@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useContext } from 'react'
 import { getDevices } from '../controllers/player';
 import { TokenContext } from '../contexts/login';
-import './CSS/DropDown.css'
+import './CSS/Dropdown.css'
 
 const DropDown = (props) => {
     const [options, setOptions] = useState([]);
