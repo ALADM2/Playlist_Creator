@@ -21,7 +21,10 @@ export const getAuth = async () => {
 
     const requestAuth = (codeVerifier, codeChallenge) => {
         const clientId = '4e3f37f14bf7476298ed0d9971c5d92d';
-        const redirectUri = process.env.REACT_APP_REDIRECT || 'http://localhost:5173/mainpage';
+        const redirectUri =
+            import.meta.env.MODE === 'development'
+                ? 'http://localhost:5173/mainpage'
+                : import.meta.env.VITE_REACT_APP_REDIRECT;
 
         const scope = 'user-read-private user-read-email user-modify-playback-state user-read-playback-state user-read-currently-playing playlist-modify-private playlist-modify-public';
         const authUrl = new URL("https://accounts.spotify.com/authorize")
