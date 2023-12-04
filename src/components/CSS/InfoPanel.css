@@ -27,4 +27,7 @@
     .infoPanel{
         gap: 10px;
     }
+    .albumImg>img{
+        height: 30dvh;
+    }
 }
