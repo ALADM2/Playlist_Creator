@@ -1,0 +1,7 @@
+.mainpage {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(175, 225, 175, 0.5);
+}
