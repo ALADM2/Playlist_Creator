@@ -1,13 +1,12 @@
 const getToken = async (codeVerifier, code) => {
     const clientID = '4e3f37f14bf7476298ed0d9971c5d92d';
-    const redirectUri = 'http://localhost:5173/mainpage' || 'https://playlist-generator.netlify.app/mainpage';
+    const redirectUri = process.env.REACT_APP_REDIRECT || 'http://localhost:5173/mainpage';
 
     try {
         const res = await fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                // 'Authorization': 'Basic ' + btoa(clientID + ':' + clientSecret)
             },
             body: new URLSearchParams({
                 client_id: clientID,
@@ -19,8 +18,6 @@ const getToken = async (codeVerifier, code) => {
         })
 
         const data = await res.json();
-        //localStorage.setItem('access_token', data.access_token);
-        //console.log(data)
         return data.access_token;
     } catch (error) {
         console.log(error.response.data)
