@@ -1,6 +1,6 @@
 const getToken = async (codeVerifier, code) => {
     const clientID = '4e3f37f14bf7476298ed0d9971c5d92d';
-    const redirectUri = 'http://localhost:5173/mainpage';
+    const redirectUri = 'http://localhost:5173/mainpage' || 'https://playlist-generator.netlify.app/mainpage';
 
     try {
         const res = await fetch('https://accounts.spotify.com/api/token', {
