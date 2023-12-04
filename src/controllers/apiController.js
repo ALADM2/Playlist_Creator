@@ -5,7 +5,6 @@ const getToken = async (codeVerifier, code) => {
         : import.meta.env.VITE_REDIRECT;
 
     try {
-        console.log(redirectUri)
         const res = await fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
