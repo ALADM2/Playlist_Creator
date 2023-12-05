@@ -8,8 +8,14 @@
    align-content: baseline;
 }
 
+.login>div{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+}
+
 .login>div>h1{
-   font-size: 15dvw;
+   font-size: 10dvw;
 }
 
 .logpage>button {
