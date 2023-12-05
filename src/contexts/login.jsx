@@ -9,22 +9,22 @@ const TokenProvider = (props) => {
     let codeVerifier = localStorage.getItem('code_verifier');
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get('code');
-    
+
     useEffect(() => {
-        async function findToken(){
+        async function findToken() {
             setToken(await getToken(codeVerifier, code));
         }
-        
-        if(code){
+
+        if (code) {
             findToken();
         }
     }, [code])
-    
+
     return (
         <TokenContext.Provider value={{ token }}>
             {props.children}
         </TokenContext.Provider>
-    )  
+    )
 }
 
 export { TokenContext, TokenProvider }

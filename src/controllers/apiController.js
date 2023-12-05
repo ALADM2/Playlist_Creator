@@ -19,8 +19,16 @@ const getToken = async (codeVerifier, code) => {
             }),
         })
 
-        const data = await res.json();
-        return data.access_token;
+        if (res.ok) {
+            console.log('Token obtained correcly.');
+            const data = await res.json();
+            return data.access_token;
+        } else {
+            console.error('Failed to obtain token. Status:', res.status);
+            console.log('Response:', await res.json());
+            return res.status;
+        }
+
     } catch (error) {
         console.log(error.response.data)
     }
@@ -73,6 +81,7 @@ const createPlaylist = async (token, genres, artistName, artistId) => {
 
         const data = await result.json();
         trackURIs = data.tracks.map(track => track.uri);
+
     } catch (error) {
         console.log(error.response.data)
     }

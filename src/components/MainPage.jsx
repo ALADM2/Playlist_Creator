@@ -4,12 +4,12 @@ import Input from './Input'
 import { play, playPlaylist, pause, next, previous } from '../controllers/player'
 import { TokenContext } from '../contexts/login'
 import InfoPanel from './InfoPanel'
+import { Navigate } from 'react-router-dom'
 import './CSS/MainPage.css'
 
 const MainPage = () => {
     const [topSongs, setTopSongs] = useState();
     const [song, setSong] = useState();
-    const [genres, setGenres] = useState();
     const [artist, setArtist] = useState();
     const [playList, setPlaylist] = useState();
     const [device, setDevice] = useState();
@@ -29,10 +29,14 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
+    if(token === 400){
+        return <Navigate to="/" />;
+    } 
+
     return (
         <div className='player'>
             <div className='selectMenu'>
-                <Input setTopSongs={setTopSongs} setGenres={setGenres} setArtist={setArtist} artist={artist} />
+                <Input setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
                 <DropDown setDevice={setDevice} data={'devices'} />
                 {player ? (

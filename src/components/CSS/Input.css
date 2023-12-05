@@ -11,6 +11,7 @@
 
 .inputDiv>button{
     height: fit-content;
+    width: -webkit-fill-available;
 }
 
 .inputDiv>div>ul{
