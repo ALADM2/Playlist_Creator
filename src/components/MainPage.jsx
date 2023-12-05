@@ -44,14 +44,22 @@ const MainPage = () => {
     }
 
     function handleResume() {
-        play(token, device)
-        setPlayer(true);
-        setPlaying(true);
+        if(device){
+            play(token, device)
+            setPlayer(true);
+            setPlaying(true);
+        } else {
+            alert("Please, select a device")
+        }
     }
 
     function handlePause() {
-        pause(token, device);
-        setPlaying(false);
+        if(device){
+            pause(token, device);
+            setPlaying(false);
+        } else {
+            alert("Please, select a device")
+        }
     }
 
     function handleSkip(action) {
