@@ -14,15 +14,18 @@ const MainPage = () => {
     const [playList, setPlaylist] = useState();
     const [device, setDevice] = useState();
     const [player, setPlayer] = useState(false);
+    const [playing, setPlaying] = useState(false);
     const { token } = useContext(TokenContext)
 
-    function handlePlay(type) {
-        type === 'song' ? play(token, song, device) : playPlaylist(token, playList[0].uri, device)
+    function handlePlay() {
+        playPlaylist(token, playList[0].uri, device)
         setPlayer(true);
+        setPlaying(true);
     }
 
     function handlePause() {
-        pause(token, device)
+        pause(token, device);
+        setPlaying(false);
     }
 
     function handleSkip(action) {
@@ -38,20 +41,18 @@ const MainPage = () => {
             <div className='selectMenu'>
                 <Input setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
+                {song ? (
+                    <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
+                    ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
-                {player ? (
-                    <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} />
-                ) : <></>}
                 <div className='panel'>
-                    <div className='playPause'>
-                        <button onClick={() => { handlePlay('song') }} type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Play Song</button>
-                        {playList ? (
-                            <button onClick={() =>{handlePlay('list')}} type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Play Playlist</button>
-                        ) : null}
-                        <button onClick={handlePause} type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Pause</button>
-                    </div>
                     <div className='nextPrev'>
                         <i onClick={() => { handleSkip('prev') }} className="fa-solid fa-backward-step fa-2xl"></i>
+                        {playing ? (
+                            <i onClick={handlePause} class="fa-solid fa-circle-pause fa-2xl"></i>
+                        ) : (
+                            <i onClick={handlePlay} class="fa-solid fa-circle-play fa-2xl"></i>
+                        )}
                         <i onClick={() => { handleSkip('next') }} className="fa-solid fa-forward-step fa-2xl"></i>
                     </div>
                 </div>

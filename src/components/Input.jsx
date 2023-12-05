@@ -18,7 +18,7 @@ const Input = (props) => {
     async function handleClick() {
         setLoading(true);
         if (props.data === 'playlist') {
-            props.setPlaylist(await createPlaylist(token, artist.genres, artist.name, artist.id));
+            props.setPlaylist(await createPlaylist(token, artist.genres, artist.name, artist.id, props.song));
         } else {
             props.setArtist(await getArtists(token, inputRef.current.value))
         }

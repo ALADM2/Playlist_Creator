@@ -65,8 +65,8 @@ const getPlaylistByGenre = async (token, genreID) => {
     }
 }
 
-const createPlaylist = async (token, genres, artistName, artistId) => {
-    let trackURIs;
+const createPlaylist = async (token, genres, artistName, artistId, firstSong) => {
+    let trackURIs = [firstSong];
     let playlistId;
     let playlistData;
     genres = genres.slice(-4);
@@ -80,7 +80,8 @@ const createPlaylist = async (token, genres, artistName, artistId) => {
         })
 
         const data = await result.json();
-        trackURIs = data.tracks.map(track => track.uri);
+        const tracks = data.tracks.map(track => track.uri);
+        trackURIs = trackURIs.concat(tracks);
 
     } catch (error) {
         console.log(error.response.data)
