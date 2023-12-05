@@ -27,7 +27,7 @@ const getDevices = async (token) => {
     }
 }
 
-const play = async (token, songURI, device) => {
+const play = async (token, device) => {
     try {
         const result = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
             method: 'PUT',
@@ -35,9 +35,6 @@ const play = async (token, songURI, device) => {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                uris: [songURI],
-            }),
         })
 
         if (result.status === 204) {

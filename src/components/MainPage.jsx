@@ -40,6 +40,11 @@ const MainPage = () => {
 
     function handlePlay() {
         playPlaylist(token, playList[0].uri, device)
+        setPlaying(true);
+    }
+
+    function handleResume() {
+        play(token, device)
         setPlayer(true);
         setPlaying(true);
     }
@@ -66,13 +71,18 @@ const MainPage = () => {
                     <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
                     ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
+                {device && playList ? (
+                <button onClick={handlePlay} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Play new playlist
+                </button>
+                ) : <></>}
                 <div className='panel'>
                     <div className='nextPrev'>
                         <i onClick={() => { handleSkip('prev') }} className="fa-solid fa-backward-step fa-2xl"></i>
                         {playing ? (
                             <i onClick={handlePause} class="fa-solid fa-circle-pause fa-2xl"></i>
                         ) : (
-                            <i onClick={handlePlay} class="fa-solid fa-circle-play fa-2xl"></i>
+                            <i onClick={handleResume} class="fa-solid fa-circle-play fa-2xl"></i>
                         )}
                         <i onClick={() => { handleSkip('next') }} className="fa-solid fa-forward-step fa-2xl"></i>
                     </div>
