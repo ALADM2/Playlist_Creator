@@ -27,13 +27,6 @@ const DropDown = (props) => {
         }
     }, [token, props])
 
-    // if(options && props.data === 'recommended'){
-    //     console.log(options.length)
-    //     options.map((option) => {
-    //         console.log(option.name)
-    //     })
-    // }
-
     const optionsList = (options ? options.map((option, index) => (
         <option key={index}>{option.name}</option>
     )) : null)

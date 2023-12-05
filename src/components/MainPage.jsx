@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import DropDown from './DropDown'
 import Input from './Input'
-import { play, playPlaylist, pause, next, previous } from '../controllers/player'
+import { playPlaylist, pause, next, previous } from '../controllers/player'
 import { TokenContext } from '../contexts/login'
 import InfoPanel from './InfoPanel'
 import { Navigate } from 'react-router-dom'
