@@ -3,5 +3,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(175, 225, 175, 0.5);
+    background-color: #72C072;
 }
+
+.logpage {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #72C072;
+ }
