@@ -1,7 +1,7 @@
 import './CSS/InfoPanel.css'
 import React, { useEffect, useState } from 'react'
 import { getSongInfo } from '../controllers/infoController'
-
+import { ColorRing } from 'react-loader-spinner'
 
 const InfoPanel = (props) => {
     const [songInfo, setSongInfo] = useState(false);
@@ -19,7 +19,7 @@ const InfoPanel = (props) => {
                 setSongInfo(response);
             }
         }
-        if(props.device){
+        if (props.device) {
             findInfo();
         }
 
@@ -47,12 +47,20 @@ const InfoPanel = (props) => {
                         <img src={image ? image : undefined} alt="" />
                     </div>
                     <div className='info'>
-                        <div style={{display: 'flex'}}><h2>Track Name:</h2><p>&nbsp;{trackName}</p></div>
-                        <div style={{display: 'flex'}}><h2>Artist:</h2><p>&nbsp;{artist}</p></div>
+                        <div style={{ display: 'flex' }}><h2>Track Name:</h2><p>&nbsp;{trackName}</p></div>
+                        <div style={{ display: 'flex' }}><h2>Artist:</h2><p>&nbsp;{artist}</p></div>
                     </div>
                 </>
             ) : (
-                <></>
+                <ColorRing
+                    visible={true}
+                    height="100"
+                    width="100"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                />
             )}
         </div>
     )

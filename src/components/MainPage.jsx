@@ -1,13 +1,14 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import DropDown from './DropDown'
 import Input from './Input'
-import { playPlaylist, pause, next, previous } from '../controllers/player'
+import { playPlaylist, pause, next, previous, getPlaybackState, play } from '../controllers/player'
 import { TokenContext } from '../contexts/login'
 import InfoPanel from './InfoPanel'
 import { Navigate } from 'react-router-dom'
 import './CSS/MainPage.css'
 
 const MainPage = () => {
+    const [playState, setPlayState] = useState();
     const [topSongs, setTopSongs] = useState();
     const [song, setSong] = useState();
     const [artist, setArtist] = useState();
@@ -16,6 +17,26 @@ const MainPage = () => {
     const [player, setPlayer] = useState(false);
     const [playing, setPlaying] = useState(false);
     const { token } = useContext(TokenContext)
+
+    //Check player state
+    useEffect(() => {
+        async function findState(){
+            setPlayState(await getPlaybackState(token));
+        }
+        if(token){
+            findState();
+        }
+    },[token])
+
+    //Get song data if something is playing
+    useEffect(() => {
+        if(playState){
+            if(playState.is_playing === true){
+                setPlaying(true);
+                setPlayer(true);
+            }
+        }
+    }, [playState])
 
     function handlePlay() {
         playPlaylist(token, playList[0].uri, device)

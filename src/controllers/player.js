@@ -1,3 +1,17 @@
+const getPlaybackState = async (token) => {
+    try {
+        const result = await fetch(`https://api.spotify.com/v1/me/player`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+
+        const data = await result.json();
+        return data;
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
+
 const getDevices = async (token) => {
     try {
 
@@ -108,4 +122,4 @@ const previous = async (token, device) => {
     }
 }
 
-export {getDevices, play, pause, next, previous, playPlaylist}
+export {getPlaybackState, getDevices, play, pause, next, previous, playPlaylist}
