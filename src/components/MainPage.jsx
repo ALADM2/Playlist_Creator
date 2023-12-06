@@ -40,6 +40,7 @@ const MainPage = () => {
 
     function handlePlay() {
         playPlaylist(token, playList[0].uri, device)
+        setPlayer(true);
         setPlaying(true);
     }
 
@@ -81,7 +82,7 @@ const MainPage = () => {
                 <DropDown setDevice={setDevice} data={'devices'} />
                 {device && playList ? (
                 <button onClick={handlePlay} type="button">
-                        Play new playlist
+                        PLAY NEW PLAYLIST
                 </button>
                 ) : <></>}
                 <div className='panel'>

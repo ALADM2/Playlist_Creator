@@ -13,6 +13,8 @@
     width: -webkit-fill-available;
     min-height: 42px;
     background: #F1D4E5;
+    box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
+    letter-spacing: 3PX;
 }
 
 .inputDiv>div>ul{

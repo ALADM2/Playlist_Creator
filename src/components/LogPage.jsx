@@ -17,7 +17,7 @@ const LogPage = () => {
                     <h1 style={{ color: '#080202', fontSize: '6vh', fontFamily: 'Agbalumo', letterSpacing:5, margin: 0 }}>🎵 CREATOR</h1>
                 </div>
             </div>
-            <button onClick={handleClick}>LOG IN</button>
+            <button onClick={handleClick} style={{fontWeight: 'bold', fontSize: '7vw', letterSpacing: 5}}>LOG IN</button>
         </>
     )
 }

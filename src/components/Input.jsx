@@ -92,7 +92,7 @@ const Input = (props) => {
                 }
                 {!loading ? (
                     <button onClick={handleClick} type="submit">
-                        {props.data === 'playlist' ? (<p>Create</p>) : (<p>Find</p>)}
+                        {props.data === 'playlist' ? (<p>CREATE</p>) : (<p>FIND</p>)}
                     </button>
                 ) : (
                     <ColorRing
