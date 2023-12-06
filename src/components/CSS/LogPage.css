@@ -16,24 +16,8 @@
 }
 
 .logpage>button {
-   padding: 15px;
    width: 80%;
-   font-weight: bold;
-   background: #F1D4E5;
-   border: 3px solid #73BBC9;
-   color: #73BBC9;
-   border-radius: 5px;
-   box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.25);
-}
-
-.logpage>button:hover {
-   background: #080202;
-   color: white;
-}
-
-.logpage>button:active {
-   transform: translateY(4px);
-   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+   padding: 15px;
 }
 
 @media (max-width: 700px) {

@@ -45,7 +45,7 @@ const DropDown = (props) => {
     }
 
     return (
-        <div>
+        <div className='dropdown'>
             <label htmlFor="options" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 {props.data == 'topSongs' ? 'Select Song' : 'Select device'}
             </label>
