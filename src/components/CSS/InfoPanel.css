@@ -24,13 +24,21 @@
 
 .info>div>h2 {
     font-weight: bold;
+    white-space: nowrap;
+}
+
+.info>div>p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (max-width: 700px) {
-    .infoPanel{
+    .infoPanel {
         gap: 10px;
     }
-    .albumImg>img{
+
+    .albumImg>img {
         height: 30dvh;
     }
 }
