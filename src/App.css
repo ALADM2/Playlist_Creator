@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #72C072;
+    background-color: #FCE9F1;
 }
 
 .logpage {
@@ -13,5 +13,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #a9e6a9;
+    background-color: #FCE9F1;
+    gap: 30px;
+ }
+
+ @media (max-width: 700px) {
+    .logpage{
+        justify-content: space-evenly;
+    }
  }

@@ -1,16 +1,13 @@
 .login {
-   height: 30%;
    width: 100%;
    display: flex;
    flex-direction: column;
-   justify-content: space-around;
-   align-items: center;
-   align-content: baseline;
 }
 
 .login>div{
    width: 100%;
    display: flex;
+   flex-direction: column;
    justify-content: center;
 }
 
@@ -22,19 +19,25 @@
    padding: 15px;
    width: 80%;
    font-weight: bold;
-   background: rgb(178, 199, 178);
-   border: 3px solid #4C218B;
-   color: #4C218B;
+   background: #F1D4E5;
+   border: 3px solid #73BBC9;
+   color: #73BBC9;
    border-radius: 5px;
    box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.25);
 }
 
 .logpage>button:hover {
-   background: #4C218B;
-   color: beige;
+   background: #080202;
+   color: white;
 }
 
 .logpage>button:active {
    transform: translateY(4px);
    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 700px) {
+   .login>div>h1{
+      font-size: 15dvw;
+   }
 }
