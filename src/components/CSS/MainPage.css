@@ -61,6 +61,13 @@
     width: 100%;
     gap: 7px;
   }
+
+  .selectMenu>button{
+    margin-top: 10px;
+    min-height: 42px;
+    background: #F1D4E5;
+  }
+
   .panel {
     margin-top: -12px;
   }
