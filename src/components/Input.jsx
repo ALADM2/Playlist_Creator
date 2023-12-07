@@ -74,7 +74,11 @@ const Input = (props) => {
     return (
         <div>
             <label htmlFor="artist" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                {props.data === 'playlist' ? (<p>Create playlist</p>) : (<p>Select an Artist</p>)}
+                {props.data === 'playlist' ? (
+                    <p>Create playlist</p>
+                ) : (
+                    <p>Select an Artist</p>
+                )}
             </label>
             <div className='inputDiv'>
                 {props.data === 'playlist' ? (
@@ -93,7 +97,11 @@ const Input = (props) => {
                 }
                 {!loading ? (
                     <button onClick={handleClick} type="submit">
-                        {props.data === 'playlist' ? (<p>CREATE</p>) : (<p>FIND</p>)}
+                        {props.data === 'playlist' ? (
+                            <p>CREATE</p>
+                        ) : (
+                            <p>FIND</p>
+                        )}
                     </button>
                 ) : (
                     <ColorRing

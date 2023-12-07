@@ -16,9 +16,10 @@ const MainPage = () => {
     const [device, setDevice] = useState();
     const [player, setPlayer] = useState(false);
     const [playing, setPlaying] = useState(false);
+    const [dataModified, setDataModified] = useState(false);
+    const [playButton, setPlayButton] = useState(false);
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
-
 
     //Check player state
     useEffect(() => {
@@ -40,10 +41,24 @@ const MainPage = () => {
         }
     }, [playState])
 
+    //If artist is modified
+    useEffect(() => {
+        setDataModified(true);
+    }, [artist])
+
+    useEffect(() => {
+        setDataModified(false);
+    }, [playList])
+
+    useEffect(() => {
+        setPlayButton(true);
+    }, [device])
+
     function handlePlay() {
         playPlaylist(token, playList[0].uri, device)
         setPlayer(true);
         setPlaying(true);
+        setPlayButton(false);
     }
 
     function handleResume() {
@@ -69,22 +84,27 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if (token === 400) {
-        return <Navigate to="/" />;
-    }
+    // if (!token) {
+    //     return <Navigate to="/" />;
+    // }
 
     return (
         <div className='player'>
             <div className='selectMenu'>
                 <Input setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
-                {song ? (
+                {song && dataModified ? (
                     <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
+                ) : song && playList && !dataModified ? (
+                    <>
+                        <label htmlFor="artist" style={{marginBottom:0}} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Playlist</label>
+                        <h2 id="artist" style={{textAlign:'center', fontFamily:'Agbalumo', letterSpacing: 3, color:'#73BBC9', padding:5, borderRadius:5, boxShadow:'2px 2px 2px 2px rgba(0, 0, 0, 0.1)'}}>{playList[0].name}</h2>
+                    </>
                 ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
-                {device && playList ? (
+                {device && playList && playButton ? (
                     <button onClick={handlePlay} type="button">
-                        PLAY NEW PLAYLIST
+                        PLAY CURRENT PLAYLIST
                     </button>
                 ) : <></>}
                 <div className='panel'>
