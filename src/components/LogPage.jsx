@@ -14,10 +14,10 @@ const LogPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <h1 style={{ color: '#73BBC9', fontFamily: 'Agbalumo', letterSpacing:5, WebkitTextStrokeWidth: 1.5, WebkitTextStrokeColor: 'black', margin: 0 }}>PLAYLIST</h1>
                     <span style={{ fontSize: '10px', margin: '0 5px' }}></span>
-                    <h1 style={{ color: '#080202', fontSize: '6vh', fontFamily: 'Agbalumo', letterSpacing:5, margin: 0 }}>🎵 CREATOR</h1>
+                    <h1 style={{ color: '#080202', fontFamily: 'Agbalumo', letterSpacing:5, margin: 0 }}>🎵 CREATOR</h1>
                 </div>
             </div>
-            <button onClick={handleClick} style={{fontWeight: 'bold', fontSize: '7vw', letterSpacing: 5}}>LOG IN</button>
+            <button onClick={handleClick}>LOG IN</button>
         </>
     )
 }
