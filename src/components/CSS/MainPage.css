@@ -13,7 +13,7 @@
 .selectMenu {
   width: fit-content;
   min-width: 20vw;
-  height: 60dvh;
+  min-height: 57dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
