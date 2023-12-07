@@ -91,7 +91,7 @@ const MainPage = () => {
     // if (!token) {
     //     return <Navigate to="/" />;
     // }
-    console.log(playList)
+
     return (
         <div className='player'>
             <div className='selectMenu'>
@@ -106,9 +106,9 @@ const MainPage = () => {
                     </>
                 ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
-                {device && playList && playButton ? (
+                {device && playList ? (
                     <button onClick={handlePlay} type="button">
-                        PLAY CURRENT PLAYLIST
+                        START CURRENT PLAYLIST
                     </button>
                 ) : <></>}
                 <div className='panel'>
