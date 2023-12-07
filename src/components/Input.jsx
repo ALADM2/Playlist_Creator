@@ -11,7 +11,8 @@ const Input = (props) => {
     const [debouncedQuery, setDebouncedQuery] = useState('');
     const [artistSelected, setArtistSelected] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { token } = useContext(TokenContext);
+    const tokenContextValue = useContext(TokenContext);
+    const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
     const inputRef = useRef(null);
     const artist = props.artist;
 

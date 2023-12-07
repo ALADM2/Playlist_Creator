@@ -16,22 +16,24 @@ const MainPage = () => {
     const [device, setDevice] = useState();
     const [player, setPlayer] = useState(false);
     const [playing, setPlaying] = useState(false);
-    const { token } = useContext(TokenContext)
+    const tokenContextValue = useContext(TokenContext);
+    const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
+
 
     //Check player state
     useEffect(() => {
-        async function findState(){
+        async function findState() {
             setPlayState(await getPlaybackState(token));
         }
-        if(token){
+        if (token) {
             findState();
         }
-    },[token])
+    }, [token])
 
     //Get song data if something is playing
     useEffect(() => {
-        if(playState){
-            if(playState.is_playing === true){
+        if (playState) {
+            if (playState.is_playing === true) {
                 setPlaying(true);
                 setPlayer(true);
             }
@@ -45,7 +47,7 @@ const MainPage = () => {
     }
 
     function handleResume() {
-        if(device){
+        if (device) {
             play(token, device)
             setPlayer(true);
             setPlaying(true);
@@ -55,7 +57,7 @@ const MainPage = () => {
     }
 
     function handlePause() {
-        if(device){
+        if (device) {
             pause(token, device);
             setPlaying(false);
         } else {
@@ -67,9 +69,9 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if(token === 400){
+    if (token === 400) {
         return <Navigate to="/" />;
-    } 
+    }
 
     return (
         <div className='player'>
@@ -78,12 +80,12 @@ const MainPage = () => {
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
                 {song ? (
                     <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
-                    ) : <></>}
+                ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
                 {device && playList ? (
-                <button onClick={handlePlay} type="button">
+                    <button onClick={handlePlay} type="button">
                         PLAY NEW PLAYLIST
-                </button>
+                    </button>
                 ) : <></>}
                 <div className='panel'>
                     <div className='nextPrev'>

@@ -5,7 +5,8 @@ import './CSS/Dropdown.css'
 
 const DropDown = (props) => {
     const [options, setOptions] = useState([]);
-    const { token } = useContext(TokenContext)
+    const tokenContextValue = useContext(TokenContext);
+    const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
     const selectRef = useRef(null);
 
     useEffect(() => {

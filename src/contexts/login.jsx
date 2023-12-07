@@ -12,7 +12,11 @@ const TokenProvider = (props) => {
 
     useEffect(() => {
         async function findToken() {
-            setToken(await getToken(codeVerifier, code));
+            const theToken = await getToken(codeVerifier, code);
+            setToken(theToken);
+            if(theToken !== 400){
+                sessionStorage.setItem('token', theToken)
+            }
         }
 
         if (code) {
