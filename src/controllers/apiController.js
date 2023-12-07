@@ -58,7 +58,6 @@ const getPlaylistByGenre = async (token, genreID) => {
         })
 
         const data = await result.json();
-        //console.log(data.error.message)
         return data.playlists.items;
     } catch (error) {
         console.log(error.response.data)

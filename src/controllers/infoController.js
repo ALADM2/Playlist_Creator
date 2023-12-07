@@ -1,4 +1,4 @@
-const getSongInfo = async (token, device) => {
+const getSongInfo = async (token) => {
     try {
         const result = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
             method: 'GET',

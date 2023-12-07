@@ -32,9 +32,9 @@ const InfoPanel = (props) => {
 
     useEffect(() => {
         if (songInfo && !songInfo.error) {
-            // console.log(songInfo)
             setTrackName(songInfo.item.name)
-            setArtist(songInfo.item.artists[0].name)
+            const artistArray = songInfo.item.artists.map(artist => artist.name).join(', ')
+            setArtist(artistArray)
             setImage(songInfo.item.album.images[1].url)
         }
     }, [songInfo])
