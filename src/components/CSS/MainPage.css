@@ -24,7 +24,7 @@
   background: #F1D4E5;
   box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
   letter-spacing: 3px;
-  min-height: 42px;
+  min-height: 35px;
 }
 
 .panel {
@@ -79,5 +79,6 @@
   }
   .nextPrev {
     padding: 7px;
+    height: 7dvh;
   }
 }  

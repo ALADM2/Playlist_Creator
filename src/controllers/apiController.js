@@ -133,7 +133,22 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
         console.log(error.response.data)
     }
 
-    return [playlistData];
+    return playlistData;
 }
 
-export { getToken, getGenres, getPlaylistByGenre, createPlaylist }
+const findPlaylist = async (token, uri) => {
+    try {
+        const playlist_id = uri.split(':').pop();
+        const result = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+
+        const data = await result.json();
+        return data;
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
+
+export { getToken, getGenres, getPlaylistByGenre, createPlaylist, findPlaylist }

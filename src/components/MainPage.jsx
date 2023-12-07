@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect } from 'react'
 import DropDown from './DropDown'
 import Input from './Input'
 import { playPlaylist, pause, next, previous, getPlaybackState, play } from '../controllers/player'
+import { findPlaylist } from '../controllers/apiController'
 import { TokenContext } from '../contexts/login'
 import InfoPanel from './InfoPanel'
-import { Navigate } from 'react-router-dom'
 import './CSS/MainPage.css'
 
 const MainPage = () => {
-    const [playState, setPlayState] = useState();
+    const [playState, setPlayState] = useState(); //Current play data
     const [topSongs, setTopSongs] = useState();
     const [song, setSong] = useState();
     const [artist, setArtist] = useState();
@@ -33,11 +33,15 @@ const MainPage = () => {
 
     //Get song data if something is playing
     useEffect(() => {
-        if (playState) {
+        async function setPlayingData () {
+            setPlaylist(await findPlaylist(token, playState.context.uri))
             if (playState.is_playing === true) {
                 setPlaying(true);
                 setPlayer(true);
             }
+        }
+        if (playState) {
+            setPlayingData()
         }
     }, [playState])
 
@@ -55,7 +59,7 @@ const MainPage = () => {
     }, [device])
 
     function handlePlay() {
-        playPlaylist(token, playList[0].uri, device)
+        playPlaylist(token, playList.uri, device)
         setPlayer(true);
         setPlaying(true);
         setPlayButton(false);
@@ -87,7 +91,7 @@ const MainPage = () => {
     // if (!token) {
     //     return <Navigate to="/" />;
     // }
-
+    console.log(playList)
     return (
         <div className='player'>
             <div className='selectMenu'>
@@ -95,10 +99,10 @@ const MainPage = () => {
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
                 {song && dataModified ? (
                     <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
-                ) : song && playList && !dataModified ? (
+                ) : playList && !dataModified ? (
                     <>
                         <label htmlFor="artist" style={{marginBottom:0}} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Playlist</label>
-                        <h2 id="artist" style={{textAlign:'center', fontFamily:'Agbalumo', letterSpacing: 3, color:'#73BBC9', padding:5, borderRadius:5, boxShadow:'2px 2px 2px 2px rgba(0, 0, 0, 0.1)'}}>{playList[0].name}</h2>
+                        <h2 id="artist" style={{textAlign:'center', fontFamily:'Agbalumo', letterSpacing: 3, color:'#73BBC9', padding:5, borderRadius:5, boxShadow:'2px 2px 2px 2px rgba(0, 0, 0, 0.1)'}}>{playList.name}</h2>
                     </>
                 ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
