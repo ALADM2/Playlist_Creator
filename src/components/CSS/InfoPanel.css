@@ -8,6 +8,7 @@
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     height: fit-content;
+    max-width: -webkit-fill-available;
 }
 
 .albumImg>img {
