@@ -7,6 +7,7 @@
     padding: 10px;
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    height: fit-content;
 }
 
 .albumImg>img {

@@ -4,6 +4,7 @@
   max-height: 100dvh;
   padding: 20px;
   justify-content: space-around;
+  align-items: center;
   gap: 30px;
   background-color: #FCE9F1;
   border-radius: 8px;
