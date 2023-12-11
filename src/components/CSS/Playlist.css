@@ -48,6 +48,7 @@ p{
 @media (min-width: 700px) {
     .listbox{
         width: min-content;
+        margin: 20px;
     }
 
     .element{
