@@ -15,4 +15,13 @@
     align-items: center;
     background-color: #FCE9F1;
     gap: 30px;
- }
+}
+
+.playlist{
+    height: auto;
+    min-height: 100dvh;
+    background-color: #d1dbe6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,7 +1,6 @@
 .player {
   display: flex;
-  height: auto;
-  max-height: 100dvh;
+  height: 100dvh;
   padding: 20px;
   justify-content: space-around;
   align-items: center;

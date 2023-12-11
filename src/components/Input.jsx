@@ -2,7 +2,7 @@ import './CSS/Input.css'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { TokenContext } from '../contexts/login';
 import { getArtists, getTopSongs, fetchSuggestions } from '../controllers/artists';
-import { createPlaylist } from '../controllers/apiController';
+import { createPlaylist } from '../controllers/playlists';
 import { ColorRing } from 'react-loader-spinner'
 
 const Input = (props) => {
