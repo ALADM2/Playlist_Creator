@@ -39,7 +39,7 @@
     text-overflow: ellipsis;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     .infoPanel {
         gap: 10px;
     }

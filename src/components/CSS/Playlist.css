@@ -1,6 +1,6 @@
 .listbox{
     background-color: #FCE9F1;
-    max-width: 100dvw;
+    width: 100dvw;
     border-radius: 5px;
 }
 
@@ -23,6 +23,7 @@
 
 .element{
     display: flex;
+    height: 10dvh;
     justify-content: space-between;
     padding: 5px;
     border-radius: 5px;
@@ -45,9 +46,25 @@ p{
     text-overflow: ellipsis;
 }
 
-@media (min-width: 700px) {
+.imgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgContainer>img{
+    border-radius: 5px;
+}
+
+.imgContainer>i{
+    padding: 15px;
+    z-index: 100px;
+    position: absolute;
+}
+
+@media (min-width: 900px) {
     .listbox{
-        width: min-content;
+        width: 60dvw;
         margin: 20px;
     }
 
