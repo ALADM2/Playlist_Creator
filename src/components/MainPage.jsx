@@ -104,14 +104,14 @@ const MainPage = () => {
                 {song && dataModified ? (
                     <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
                 ) : playList && !dataModified ? (
-                    <>
+                    <div className='current'>
                         <label htmlFor="artist" style={{ marginBottom: 0 }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Playlist</label>
                         <Link to='/playlist' style={{ textDecoration: 'none' }}>
-                            <h2 id="artist" style={{ textAlign: 'center', fontFamily: 'Agbalumo', letterSpacing: 3, color: '#73BBC9', padding: 5, borderRadius: 5, boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.1)' }}>
+                            <button className='currentButton' id="artist" >
                                 {playList.name}
-                            </h2>
+                            </button>
                         </Link>
-                    </>
+                    </div>
                 ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
                 {device && playList ? (

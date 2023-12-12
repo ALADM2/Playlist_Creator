@@ -1,6 +1,5 @@
 .player {
   display: flex;
-  height: 100dvh;
   padding: 20px;
   justify-content: space-around;
   align-items: center;
@@ -20,19 +19,36 @@
   gap: 15px;
 }
 
-.selectMenu>button{
+.selectMenu>button {
   background: #F1D4E5;
   box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
   letter-spacing: 3px;
   min-height: 35px;
 }
 
+.current {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+}
+
+.currentButton{
+  font-family: 'Agbalumo';
+  letter-spacing: 3px; 
+  color: #73BBC9;
+  padding: 5px; 
+  border-radius: 20px;
+  box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
+  width: -webkit-fill-available;
+}
+
 .panel {
-  height: 25%;
+  /* height: 25%; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  padding: 25px;
 }
 
 .playPause {
@@ -64,20 +80,23 @@
     width: 100dvw;
     gap: 10px;
   }
+
   .selectMenu {
     width: 100%;
     gap: 7px;
   }
 
-  .selectMenu>button{
+  .selectMenu>button {
     margin-top: 10px;
   }
 
   .panel {
     margin-top: -12px;
+    padding: 5px;
   }
+
   .nextPrev {
     padding: 7px;
     height: 7dvh;
   }
-}  
+}
