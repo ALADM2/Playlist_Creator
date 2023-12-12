@@ -28,7 +28,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
         })
 
         const data = await result.json();
-        const tracks = data.tracks.map(track => track.uri);
+        const tracks = await data.tracks.map(track => track.uri);
         trackURIs = trackURIs.concat(tracks);
 
     } catch (error) {
@@ -51,7 +51,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
         })
 
         playlistData = await result.json();
-        playlistId = playlistData.id;
+        playlistId = await playlistData.id;
 
     } catch (error) {
         console.log(error.response)
@@ -82,7 +82,29 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
         console.log(error.response.data)
     }
 
-    return playlistData;
+    try {
+        // Step 4: Get full playlist
+        const fullPlaylist = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+        });
+
+        if (fullPlaylist.ok) {
+            console.log('Playlist Completed.');
+            const data = await fullPlaylist.json();
+            return data;
+        } else {
+            console.error('Failed to get full playlist. Status:', fullPlaylist.status);
+            console.log('Response:', await fullPlaylist.json());
+        }
+
+
+    } catch (error) {
+        console.log(error.response.data)
+    }
+
 }
 
 const findPlaylist = async (token, uri) => {

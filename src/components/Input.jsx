@@ -4,6 +4,7 @@ import { TokenContext } from '../contexts/login';
 import { getArtists, getTopSongs, fetchSuggestions } from '../controllers/artists';
 import { createPlaylist } from '../controllers/playlists';
 import { ColorRing } from 'react-loader-spinner'
+import { ListContext } from '../contexts/playlist';
 
 const Input = (props) => {
     const [query, setQuery] = useState('');
@@ -11,6 +12,7 @@ const Input = (props) => {
     const [debouncedQuery, setDebouncedQuery] = useState('');
     const [artistSelected, setArtistSelected] = useState(false);
     const [loading, setLoading] = useState(false);
+    const { getPlayList } = useContext(ListContext);
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
     const inputRef = useRef(null);
@@ -19,7 +21,7 @@ const Input = (props) => {
     async function handleClick() {
         setLoading(true);
         if (props.data === 'playlist') {
-            props.setPlaylist(await createPlaylist(token, artist.genres, artist.name, artist.id, props.song));
+            getPlayList(await createPlaylist(token, artist.genres, artist.name, artist.id, props.song));
         } else {
             props.setArtist(await getArtists(token, inputRef.current.value))
         }

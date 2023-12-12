@@ -14,13 +14,12 @@ const MainPage = () => {
     const [topSongs, setTopSongs] = useState();
     const [song, setSong] = useState();
     const [artist, setArtist] = useState();
-    const [playList, setPlaylist] = useState();
     const [device, setDevice] = useState();
     const [player, setPlayer] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [dataModified, setDataModified] = useState(false);
     const [playButton, setPlayButton] = useState(false);
-    const { getPlayList } = useContext(ListContext);
+    const { getPlayList, playList } = useContext(ListContext);
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
 
@@ -37,7 +36,7 @@ const MainPage = () => {
     //Get song data if something is playing
     useEffect(() => {
         async function setPlayingData() {
-            setPlaylist(await findPlaylist(token, playState.context.uri))
+            getPlayList(await findPlaylist(token, playState.context.uri))
             if (playState.is_playing === true) {
                 setPlaying(true);
                 setPlayer(true);
@@ -55,7 +54,6 @@ const MainPage = () => {
 
     useEffect(() => {
         setDataModified(false);
-        getPlayList(playList)
     }, [playList])
 
     useEffect(() => {
@@ -92,7 +90,7 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if (tokenContextValue === 400) {
+    if (tokenContextValue.token === null && !sessionStorage.getItem('token')) {
         return <Navigate to="/" />;
     }
 
@@ -102,15 +100,17 @@ const MainPage = () => {
                 <Input setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
                 {song && dataModified ? (
-                    <Input data={'playlist'} setPlaylist={setPlaylist} artist={artist} song={song} />
+                    <Input data={'playlist'} artist={artist} song={song} />
                 ) : playList && !dataModified ? (
                     <div className='current'>
                         <label htmlFor="artist" style={{ marginBottom: 0 }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Playlist</label>
+                        {playList.tracks.items.length > 0 ? (
                         <Link to='/playlist' style={{ textDecoration: 'none' }}>
                             <button className='currentButton' id="artist" >
                                 {playList.name}
                             </button>
                         </Link>
+                        ) : <></>}
                     </div>
                 ) : <></>}
                 <DropDown setDevice={setDevice} data={'devices'} />
@@ -123,9 +123,9 @@ const MainPage = () => {
                     <div className='nextPrev'>
                         <i onClick={() => { handleSkip('prev') }} className="fa-solid fa-backward-step fa-2xl"></i>
                         {playing ? (
-                            <i onClick={handlePause} class="fa-solid fa-circle-pause fa-2xl"></i>
+                            <i onClick={handlePause} className="fa-solid fa-circle-pause fa-2xl"></i>
                         ) : (
-                            <i onClick={handleResume} class="fa-solid fa-circle-play fa-2xl"></i>
+                            <i onClick={handleResume} className="fa-solid fa-circle-play fa-2xl"></i>
                         )}
                         <i onClick={() => { handleSkip('next') }} className="fa-solid fa-forward-step fa-2xl"></i>
                     </div>

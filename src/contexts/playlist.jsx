@@ -6,10 +6,9 @@ const ListContext = createContext();
 const ListProvider = (props) => {
     const [playList, setPlaylist] = useState();
 
-    function getPlayList(data) {
-        setPlaylist(data)
+    async function getPlayList(data) {
+        setPlaylist(await data)
     }
-
     return (
         <ListContext.Provider value={{ playList, getPlayList }}>
             {props.children}

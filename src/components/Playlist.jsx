@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './CSS/Playlist.css'
 import { ListContext } from '../contexts/playlist';
+import { Navigate } from 'react-router-dom'
+import { play } from '../controllers/player';
 
 const Playlist = () => {
     const [isHovering, setIsHovering] = useState(false);
@@ -19,6 +21,10 @@ const Playlist = () => {
 
     function handleClick(){
         
+    }
+
+    if(!playList){
+        return <Navigate to="/mainpage" />;
     }
 
     return (
