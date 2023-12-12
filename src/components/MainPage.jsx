@@ -90,9 +90,9 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if (tokenContextValue.token === null && !sessionStorage.getItem('token')) {
-        return <Navigate to="/" />;
-    }
+    // if (tokenContextValue.token === null && !sessionStorage.getItem('token')) {
+    //     return <Navigate to="/" />;
+    // }
 
     return (
         <div className='player'>

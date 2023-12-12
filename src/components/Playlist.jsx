@@ -44,9 +44,9 @@ const Playlist = () => {
 
     }
 
-    if (!playList) {
-        return <Navigate to="/mainpage" />;
-    }
+    // if (!playList) {
+    //     return <Navigate to="/mainpage" />;
+    // }
 
     return (
         <div className='listbox'>
