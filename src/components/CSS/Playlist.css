@@ -63,6 +63,11 @@ p{
     position: absolute;
 }
 
+.wrapper-class{
+    z-index: 100px;
+    position: absolute;
+}
+
 @media (min-width: 900px) {
     .listbox{
         width: 60dvw;

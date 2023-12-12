@@ -1,14 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './CSS/Playlist.css'
 import { ListContext } from '../contexts/playlist';
-import { Navigate } from 'react-router-dom'
-import { play } from '../controllers/player';
+import { TokenContext } from '../contexts/login'
+import { Navigate } from 'react-router-dom';
+import { getPlaybackState } from '../controllers/player';
+import { Audio } from 'react-loader-spinner'
 
 const Playlist = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [elementIndex, setElementIndex] = useState();
+    const [playState, setPlayState] = useState(); //Current play data
+    const [currentUri, setCurrentUri] = useState();
     const { playList } = useContext(ListContext);
-    console.log(playList)
+    const tokenContextValue = useContext(TokenContext);
+    const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
+
+    //Check player state
+    useEffect(() => {
+        async function findState() {
+            setPlayState(await getPlaybackState(token));
+        }
+        if (token) {
+            findState();
+        }
+    }, [token])
+
+    useEffect(() => {
+        if (playState) {
+            setCurrentUri(playState.item.uri)
+        }
+    }, [playState])
 
     function handleIn(index) {
         setIsHovering(true);
@@ -19,11 +40,11 @@ const Playlist = () => {
         setIsHovering(false);
     }
 
-    function handleClick(){
-        
+    function handleClick() {
+
     }
 
-    if(!playList){
+    if (!playList) {
         return <Navigate to="/mainpage" />;
     }
 
@@ -39,10 +60,28 @@ const Playlist = () => {
                             <p>Artist: {song.track.artists.map(artist => artist.name).join(', ')}</p>
                         </div>
                         <div className='imgContainer'>
-                            {isHovering && index === elementIndex ? (
+                            {isHovering && index === elementIndex && song.track.uri !== currentUri ? (
                                 <>
-                                    <img src={song.track.album.images[2].url} alt="" style={{opacity: 0.3}} />
+                                    <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
                                     <i onClick={handleClick} class="fa-solid fa-circle-play fa-2xl"></i>
+                                </>
+                            ) : song.track.uri === currentUri && isHovering && index === elementIndex ? (
+                                <>
+                                    <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
+                                    <i className="fa-solid fa-circle-pause fa-2xl"></i>
+                                </>
+                            ) : song.track.uri === currentUri ? (
+                                <>
+                                    <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.7 }} />
+                                    <Audio
+                                        height="60"
+                                        width="80"
+                                        color="#4fa94d"
+                                        ariaLabel="audio-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClass="wrapper-class"
+                                        visible={true}
+                                    />
                                 </>
                             ) : (
                                 <img src={song.track.album.images[2].url} alt="" />
