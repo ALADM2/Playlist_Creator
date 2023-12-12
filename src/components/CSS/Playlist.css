@@ -2,6 +2,8 @@
     background-color: #FCE9F1;
     width: 100dvw;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
 }
 
 .name{
@@ -19,6 +21,7 @@
 
 .list{
     padding: 10px;
+    width: 100%;
 }
 
 .element{
@@ -63,10 +66,10 @@ p{
     position: absolute;
 }
 
-.wrapper-class{
+/* .wrapper-class{
     z-index: 100px;
     position: absolute;
-}
+} */
 
 @media (min-width: 900px) {
     .listbox{

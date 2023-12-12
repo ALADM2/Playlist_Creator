@@ -20,7 +20,7 @@ const getToken = async (codeVerifier, code) => {
         })
 
         if (res.ok) {
-            console.log('Token obtained correcly.');
+            console.log('Token obtained correctly.');
             const data = await res.json();
             return data.access_token;
         } else {

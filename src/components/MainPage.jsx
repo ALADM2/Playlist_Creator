@@ -30,6 +30,8 @@ const MainPage = () => {
         }
         if (token) {
             findState();
+        } else {
+            tokenContextValue.findToken();
         }
     }, [token])
 
@@ -90,10 +92,10 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    // if (tokenContextValue.token === null && !sessionStorage.getItem('token')) {
-    //     return <Navigate to="/" />;
-    // }
-
+    if (!TokenContext) {
+        return <Navigate to="/mainpage" />;
+    }
+    console.log(token)
     return (
         <div className='player'>
             <div className='selectMenu'>

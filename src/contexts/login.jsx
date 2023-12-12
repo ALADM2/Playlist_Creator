@@ -10,6 +10,14 @@ const TokenProvider = (props) => {
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get('code');
 
+    const findToken = async () => {
+        const theToken = await getToken(codeVerifier, code);
+        setToken(theToken);
+        if(theToken !== 400){
+            sessionStorage.setItem('token', theToken)
+        }
+    }
+
     useEffect(() => {
         async function findToken() {
             const theToken = await getToken(codeVerifier, code);
@@ -25,7 +33,7 @@ const TokenProvider = (props) => {
     }, [code])
 
     return (
-        <TokenContext.Provider value={{ token }}>
+        <TokenContext.Provider value={{ token, findToken }}>
             {props.children}
         </TokenContext.Provider>
     )

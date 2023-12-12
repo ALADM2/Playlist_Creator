@@ -15,7 +15,6 @@ const InfoPanel = (props) => {
             if (!songInfo || response.item.id !== songInfo.item.id) {
                 console.log('Track has changed:', response.item.name);
                 // Do something when the track changes
-                // For example, update the current track state
                 setSongInfo(response);
             }
         }
@@ -23,7 +22,7 @@ const InfoPanel = (props) => {
             findInfo();
         }
 
-        // Check currently playing track every 10 seconds (adjust as needed)
+        // Check currently playing track every 5 seconds
         const intervalId = setInterval(findInfo, 5000);
 
         // Cleanup the interval on component unmount
