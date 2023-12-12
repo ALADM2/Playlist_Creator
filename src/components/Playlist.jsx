@@ -17,6 +17,10 @@ const Playlist = () => {
         setIsHovering(false);
     }
 
+    function handleClick(){
+        
+    }
+
     return (
         <div className='listbox'>
             <ul className='list'>
@@ -32,7 +36,7 @@ const Playlist = () => {
                             {isHovering && index === elementIndex ? (
                                 <>
                                     <img src={song.track.album.images[2].url} alt="" style={{opacity: 0.3}} />
-                                    <i class="fa-solid fa-circle-play fa-2xl"></i>
+                                    <i onClick={handleClick} class="fa-solid fa-circle-play fa-2xl"></i>
                                 </>
                             ) : (
                                 <img src={song.track.album.images[2].url} alt="" />
