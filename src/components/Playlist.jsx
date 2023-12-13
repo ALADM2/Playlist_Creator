@@ -82,7 +82,6 @@ const Playlist = () => {
     // if (!playList) {
     //     return <Navigate to="/mainpage" />;
     // }
-    console.log(isPlaying)
 
     return (
         <>

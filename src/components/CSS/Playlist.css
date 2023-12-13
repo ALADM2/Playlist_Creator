@@ -85,8 +85,4 @@ p{
         background: #F1D4E5;
     }
 
-    .wrapper-class{
-        z-index: 0;
-        position: relative;
-    }
 }

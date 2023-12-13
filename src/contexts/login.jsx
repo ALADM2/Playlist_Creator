@@ -27,7 +27,7 @@ const TokenProvider = (props) => {
             }
         }
 
-        if (code) {
+        if (!token) {
             findToken();
         }
     }, [code])

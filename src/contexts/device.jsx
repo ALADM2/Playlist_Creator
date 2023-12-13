@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import { getPlaybackState } from "../controllers/player";
 import { TokenContext } from '../contexts/login'
+import { Navigate } from 'react-router-dom'
 
 const DeviceContext = createContext();
 
@@ -12,15 +13,19 @@ const DeviceProvider = (props) => {
 
     useEffect(() => {
         async function findDevice(){
-            const data = await getPlaybackState(token);
-            setDevice(data.device.id)
+            try{          
+                const data = await getPlaybackState(token);
+                setDevice(data.device.id);
+            } catch(error){
+                console.log(error)
+            }
         }
-
-        if(!device){
+        
+        if(!device && token){
             findDevice()
         }
     }, [device, token])
-
+    
     async function saveDevice(deviceId) {
         sessionStorage.setItem('device', deviceId);
         setDevice(sessionStorage.getItem('device'));
