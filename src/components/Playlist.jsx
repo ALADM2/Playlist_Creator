@@ -6,11 +6,12 @@ import { DeviceContext } from '../contexts/device';
 import { Navigate } from 'react-router-dom';
 import { getSongInfo } from '../controllers/infoController';
 import { findPlaylist } from '../controllers/playlists'
-import { playSong, pause, getPlaybackState } from '../controllers/player';
+import { playSong, pause, play } from '../controllers/player';
 import { Audio, ColorRing } from 'react-loader-spinner'
 
 const Playlist = () => {
     const [isHovering, setIsHovering] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [elementIndex, setElementIndex] = useState();
     const [currentSongInfo, setCurrentSongInfo] = useState(); //Current song data
     const [currentUri, setCurrentUri] = useState();
@@ -42,6 +43,9 @@ const Playlist = () => {
     useEffect(() => {
         if (currentSongInfo) {
             setCurrentUri(currentSongInfo.item.uri)
+            if(currentSongInfo.is_playing === true){
+                setIsPlaying(true);
+            }
         }
 
         async function newPlaylist() {
@@ -67,15 +71,18 @@ const Playlist = () => {
         const playListURI = currentSongInfo.context.uri;
         const songUri = song.track.uri;
         playSong(token, playListURI, songUri, device);
+        setIsPlaying(true);
     }
 
     function handlePause() {
         pause(token, device)
+        setIsPlaying(false);
     }
 
     // if (!playList) {
     //     return <Navigate to="/mainpage" />;
     // }
+    console.log(isPlaying)
 
     return (
         <>
@@ -96,10 +103,15 @@ const Playlist = () => {
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
                                             <i onClick={()=>{handlePlay(song)}} className="fa-solid fa-circle-play fa-2xl"></i>
                                         </>
-                                    ) : song.track.uri === currentUri && isHovering && index === elementIndex ? (
+                                    ) : isHovering && index === elementIndex && song.track.uri === currentUri && isPlaying ? (
                                         <>
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
                                             <i onClick={()=>{handlePause()}} className="fa-solid fa-circle-pause fa-2xl"></i>
+                                        </>
+                                    ) : isHovering && index === elementIndex && song.track.uri === currentUri && !isPlaying ? (
+                                        <>
+                                            <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
+                                            <i onClick={()=>{play(token, device)}} className="fa-solid fa-circle-play fa-2xl"></i>
                                         </>
                                     ) : song.track.uri === currentUri ? (
                                         <>
