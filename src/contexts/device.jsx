@@ -13,7 +13,6 @@ const DeviceProvider = (props) => {
     useEffect(() => {
         async function findDevice(){
             const data = await getPlaybackState(token);
-            console.log(data)
             setDevice(data.device.id)
         }
 
@@ -26,7 +25,7 @@ const DeviceProvider = (props) => {
         sessionStorage.setItem('device', deviceId);
         setDevice(sessionStorage.getItem('device'));
     }
-    console.log(device)
+
     return (
         <DeviceContext.Provider value={{ device, saveDevice }}>
             {props.children}
