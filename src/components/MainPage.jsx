@@ -5,6 +5,7 @@ import { playPlaylist, pause, next, previous, getPlaybackState, play } from '../
 import { findPlaylist } from '../controllers/playlists'
 import { TokenContext } from '../contexts/login'
 import { ListContext } from '../contexts/playlist'
+import { DeviceContext, DeviceProvider } from '../contexts/device'
 import InfoPanel from './InfoPanel'
 import { Navigate, Link } from 'react-router-dom'
 import './CSS/MainPage.css'
@@ -14,12 +15,12 @@ const MainPage = () => {
     const [topSongs, setTopSongs] = useState();
     const [song, setSong] = useState();
     const [artist, setArtist] = useState();
-    const [device, setDevice] = useState();
     const [player, setPlayer] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [dataModified, setDataModified] = useState(false);
     const [playButton, setPlayButton] = useState(false);
     const { getPlayList, playList } = useContext(ListContext);
+    const { device } = useContext(DeviceContext);
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
 
@@ -95,7 +96,7 @@ const MainPage = () => {
     if (!TokenContext) {
         return <Navigate to="/mainpage" />;
     }
-    console.log(token)
+    
     return (
         <div className='player'>
             <div className='selectMenu'>
@@ -115,7 +116,7 @@ const MainPage = () => {
                         ) : <></>}
                     </div>
                 ) : <></>}
-                <DropDown setDevice={setDevice} data={'devices'} />
+                <DropDown data={'devices'} />
                 {device && playList ? (
                     <button onClick={handlePlay} type="button">
                         START CURRENT PLAYLIST

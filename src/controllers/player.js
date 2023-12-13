@@ -48,6 +48,34 @@ const play = async (token, device) => {
     }
 }
 
+const playSong = async (token, playlistURI, songUri, device) => {
+    try {
+        const result = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                context_uri: playlistURI,
+                offset: {
+                    uri: songUri,
+                },
+            }),
+        })
+
+        if (result.status === 204) {
+            console.log('Song played successfully');
+        } else {
+            console.log('Failed to play song. Status:', result.status);
+            console.log('Response:', await result.json());
+        }
+
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
+
 const playPlaylist = async (token, playlistURI, device) => {
     try {
         const result = await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device}`, {
@@ -118,4 +146,4 @@ const previous = async (token, device) => {
     }
 }
 
-export {getPlaybackState, getDevices, play, pause, next, previous, playPlaylist}
+export { getPlaybackState, getDevices, play, pause, next, previous, playSong, playPlaylist }

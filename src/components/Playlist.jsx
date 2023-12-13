@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import './CSS/Playlist.css'
 import { ListContext } from '../contexts/playlist';
 import { TokenContext } from '../contexts/login'
+import { DeviceContext } from '../contexts/device';
 import { Navigate } from 'react-router-dom';
 import { getSongInfo } from '../controllers/infoController';
 import { findPlaylist } from '../controllers/playlists'
+import { playSong, pause, getPlaybackState } from '../controllers/player';
 import { Audio, ColorRing } from 'react-loader-spinner'
 
 const Playlist = () => {
@@ -13,6 +15,8 @@ const Playlist = () => {
     const [currentSongInfo, setCurrentSongInfo] = useState(); //Current song data
     const [currentUri, setCurrentUri] = useState();
     const { getPlayList, playList } = useContext(ListContext);
+    const deviceContextValue = useContext(DeviceContext);
+    const device = deviceContextValue.device ? deviceContextValue.device : sessionStorage.getItem('device')
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
 
@@ -41,7 +45,7 @@ const Playlist = () => {
         }
 
         async function newPlaylist() {
-            getPlayList(await findPlaylist(token, currentSongInfo.context.uri))
+            getPlayList(await findPlaylist(token, currentSongInfo.context.uri, device))
         }
 
         if (!playList) {
@@ -59,8 +63,14 @@ const Playlist = () => {
         setIsHovering(false);
     }
 
-    function handleClick() {
+    function handlePlay(song) {
+        const playListURI = currentSongInfo.context.uri;
+        const songUri = song.track.uri;
+        playSong(token, playListURI, songUri, device);
+    }
 
+    function handlePause() {
+        pause(token, device)
     }
 
     // if (!playList) {
@@ -84,12 +94,12 @@ const Playlist = () => {
                                     {isHovering && index === elementIndex && song.track.uri !== currentUri ? (
                                         <>
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
-                                            <i onClick={handleClick} className="fa-solid fa-circle-play fa-2xl"></i>
+                                            <i onClick={()=>{handlePlay(song)}} className="fa-solid fa-circle-play fa-2xl"></i>
                                         </>
                                     ) : song.track.uri === currentUri && isHovering && index === elementIndex ? (
                                         <>
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
-                                            <i className="fa-solid fa-circle-pause fa-2xl"></i>
+                                            <i onClick={()=>{handlePause()}} className="fa-solid fa-circle-pause fa-2xl"></i>
                                         </>
                                     ) : song.track.uri === currentUri ? (
                                         <>

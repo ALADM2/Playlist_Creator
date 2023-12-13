@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef, useContext } from 'react'
 import { getDevices } from '../controllers/player';
 import { TokenContext } from '../contexts/login';
+import { DeviceContext } from '../contexts/device';
 import './CSS/Dropdown.css'
 
 const DropDown = (props) => {
     const [options, setOptions] = useState([]);
+    const { saveDevice } = useContext(DeviceContext);
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
     const selectRef = useRef(null);
@@ -39,7 +41,7 @@ const DropDown = (props) => {
                     props.setSong(option.uri);
                 }
                 if (props.data === 'devices') {
-                    props.setDevice(option.id);
+                    saveDevice(option.id);
                 }
             }
         })
