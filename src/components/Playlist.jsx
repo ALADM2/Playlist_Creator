@@ -124,7 +124,7 @@ const Playlist = () => {
                                                 wrapperClass="wrapper-class"
                                                 visible={true}
                                             />
-                                            <img src={song.track.album.images[2].url} alt="" />
+                                            <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.6 }} />
                                         </>
                                     ) : (
                                         <img src={song.track.album.images[2].url} alt="" />
