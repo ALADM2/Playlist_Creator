@@ -76,13 +76,13 @@ const Playlist = () => {
     // if (!playList) {
     //     return <Navigate to="/mainpage" />;
     // }
-    //console.log(currentSongInfo)
+
     return (
         <>
             {playList ? (
                 <div className='listbox'>
                     <ul className='list'>
-                        <h2 className='name'>{playList.name}</h2>
+                        <h1 className='name'>{playList.name}</h1>
                         <hr className='bar'></hr>
                         {playList.tracks.items.map((song, index) => (
                             <li onMouseEnter={() => { handleIn(index) }} onMouseLeave={handleOut} className='element' key={song.track.id}>
