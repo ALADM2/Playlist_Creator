@@ -18,6 +18,7 @@ const MainPage = () => {
     const [player, setPlayer] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [dataModified, setDataModified] = useState(false);
+    const [searchToggle, setSerachToggle] = useState(false);
     const [playButton, setPlayButton] = useState(false);
     const { getPlayList, playList } = useContext(ListContext);
     const { device } = useContext(DeviceContext);
@@ -100,8 +101,15 @@ const MainPage = () => {
     return (
         <div className='player'>
             <div className='selectMenu'>
-                <Input setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
-                <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
+                <Input data={'artist'} setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
+                <div className='songDiv'>
+                    {!searchToggle ? (
+                        <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
+                    ) : (
+                        <Input data={'songs'} artist={artist} setSong={setSong} song={song} />
+                    )}
+                    <button onClick={() => {setSerachToggle(!searchToggle)}}><i class="fa-solid fa-angle-right fa-2xl"></i></button>
+                </div>
                 <DropDown data={'devices'} />
                 {device && playList ? (
                     <button onClick={handlePlay} type="button">

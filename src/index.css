@@ -16,7 +16,7 @@ body {
 }
 
 button {
-  min-width: 100px;
+  min-width: 50px;
   font-weight: bold;
   background: #F1D4E5;
   border: 3px solid #73BBC9;

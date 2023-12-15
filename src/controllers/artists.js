@@ -13,6 +13,21 @@ const fetchSuggestions = async (token, query) => {
     }
 };
 
+const fetchSongSuggestions = async (token, query, artist) => {
+    try {
+        const response = await fetch(`https://api.spotify.com/v1/search?q=track:${query}+artist:${artist}&type=track`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        const data = await response.json();
+        // Extract relevant artist information from the response
+        const songs = data.tracks?.items || [];
+        return songs;
+    } catch (error) {
+        console.error('Error fetching artist suggestions:', error);
+    }
+};
+
 const getArtists = async (token, artistName) => {
     try {
         const result = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`, {
@@ -25,6 +40,25 @@ const getArtists = async (token, artistName) => {
             return data.artists.items[0];
         } else {
             console.error('Error searching for artists:', result.status, result.statusText);
+        }
+
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
+
+const getSongs = async (token, songName) => {
+    try {
+        const result = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(songName)}&type=track`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+
+        if(result.ok){
+            const data = await result.json();
+            return data.tracks.items[0].uri;
+        } else {
+            console.error('Error searching for tracks:', result.status, result.statusText);
         }
 
     } catch (error) {
@@ -52,4 +86,4 @@ const getTopSongs = async (token, artistID) => {
     }
 }
 
-export { getArtists, getTopSongs, fetchSuggestions }
+export { getArtists, getTopSongs, fetchSuggestions, getSongs, fetchSongSuggestions }

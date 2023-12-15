@@ -19,6 +19,21 @@
   gap: 15px;
 }
 
+.songDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.songDiv>div{
+  width: -webkit-fill-available;
+}
+
+.songDiv > button{
+  padding: 5px 0px;
+  margin-left: 10px;
+}
+
 .selectMenu>button {
   background: #F1D4E5;
   box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
@@ -32,11 +47,11 @@
   gap: inherit;
 }
 
-.currentButton{
+.currentButton {
   font-family: 'Agbalumo';
-  letter-spacing: 3px; 
+  letter-spacing: 3px;
   color: #73BBC9;
-  padding: 5px; 
+  padding: 5px;
   border-radius: 20px;
   box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
   width: -webkit-fill-available;
