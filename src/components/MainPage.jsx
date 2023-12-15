@@ -102,6 +102,12 @@ const MainPage = () => {
             <div className='selectMenu'>
                 <Input setTopSongs={setTopSongs} setArtist={setArtist} artist={artist} />
                 <DropDown setSong={setSong} topSongs={topSongs} data={'topSongs'} />
+                <DropDown data={'devices'} />
+                {device && playList ? (
+                    <button onClick={handlePlay} type="button">
+                        START CURRENT PLAYLIST
+                    </button>
+                ) : <></>}
                 {song && dataModified ? (
                     <Input data={'playlist'} artist={artist} song={song} />
                 ) : playList && !dataModified ? (
@@ -115,12 +121,6 @@ const MainPage = () => {
                         </Link>
                         ) : <></>}
                     </div>
-                ) : <></>}
-                <DropDown data={'devices'} />
-                {device && playList ? (
-                    <button onClick={handlePlay} type="button">
-                        START CURRENT PLAYLIST
-                    </button>
                 ) : <></>}
                 <div className='panel'>
                     <div className='nextPrev'>

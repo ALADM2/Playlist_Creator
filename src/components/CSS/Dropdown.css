@@ -1,3 +1,20 @@
-.dropdown{
+.dropDiv{
     width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dropDiv>div{
+    width: 190%;
+}
+
+.dropDiv>button{
+    width: -webkit-fill-available;
+    min-height: 42px;
+    max-width: fit-content;
+    padding: 0px 20px;
+    background: #F1D4E5;
+    box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
+    letter-spacing: 3px;
 }
