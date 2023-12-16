@@ -78,7 +78,7 @@ const Input = (props) => {
         } else {
             setSongSelected(true);
             suggestions.map((option) => {
-                if (option.name === inputRef.current.value) {
+                if (option.name === value.name) {
                     props.setSong(option.uri);
                 }
             })
