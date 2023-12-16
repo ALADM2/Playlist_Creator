@@ -56,6 +56,7 @@ const getSongs = async (token, songName) => {
 
         if(result.ok){
             const data = await result.json();
+            console.log(data)
             return data.tracks.items[0].uri;
         } else {
             console.error('Error searching for tracks:', result.status, result.statusText);

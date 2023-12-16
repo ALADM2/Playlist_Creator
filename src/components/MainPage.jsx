@@ -54,7 +54,7 @@ const MainPage = () => {
     //If artist is modified
     useEffect(() => {
         setDataModified(true);
-    }, [artist])
+    }, [artist, song])
 
     useEffect(() => {
         setDataModified(false);
@@ -97,7 +97,8 @@ const MainPage = () => {
     if (!TokenContext) {
         return <Navigate to="/mainpage" />;
     }
-    
+    console.log(song)
+    console.log(dataModified)
     return (
         <div className='player'>
             <div className='selectMenu'>
@@ -111,11 +112,6 @@ const MainPage = () => {
                     <button onClick={() => {setSerachToggle(!searchToggle)}}><i class="fa-solid fa-angle-right fa-2xl"></i></button>
                 </div>
                 <DropDown data={'devices'} />
-                {device && playList ? (
-                    <button onClick={handlePlay} type="button">
-                        START CURRENT PLAYLIST
-                    </button>
-                ) : <></>}
                 {song && dataModified ? (
                     <Input data={'playlist'} artist={artist} song={song} />
                 ) : playList && !dataModified ? (
@@ -129,6 +125,11 @@ const MainPage = () => {
                         </Link>
                         ) : <></>}
                     </div>
+                ) : <></>}
+                {device && playList ? (
+                    <button onClick={handlePlay} type="button">
+                        START CURRENT PLAYLIST
+                    </button>
                 ) : <></>}
                 <div className='panel'>
                     <div className='nextPrev'>

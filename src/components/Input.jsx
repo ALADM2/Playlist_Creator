@@ -32,7 +32,7 @@ const Input = (props) => {
 
     useEffect(() => {
         async function findTopSongs() {
-            if (artist && props.data !== 'playlist') {
+            if (artist && props.data !== 'playlist' && props.data !== 'songs') {
                 props.setTopSongs(await getTopSongs(token, artist.id))
             }
         }
@@ -77,10 +77,11 @@ const Input = (props) => {
             sendArtist();
         } else {
             setSongSelected(true);
-            async function sendSong() {
-                props.setSong(await getSongs(token, inputRef.current.value))
-            }
-            sendSong();
+            suggestions.map((option) => {
+                if (option.name === inputRef.current.value) {
+                    props.setSong(option.uri);
+                }
+            })
         }
     };
 
@@ -91,9 +92,7 @@ const Input = (props) => {
         setArtistSelected(false);
         setSongSelected(false);
     };
-    if (props.song) {
-        console.log(props.song)
-    }
+
     return (
         <div>
             <label htmlFor="artist" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
