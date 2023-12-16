@@ -97,8 +97,7 @@ const MainPage = () => {
     if (!TokenContext) {
         return <Navigate to="/mainpage" />;
     }
-    console.log(song)
-    console.log(dataModified)
+
     return (
         <div className='player'>
             <div className='selectMenu'>
@@ -109,7 +108,7 @@ const MainPage = () => {
                     ) : (
                         <Input data={'songs'} artist={artist} setSong={setSong} song={song} />
                     )}
-                    <button onClick={() => {setSerachToggle(!searchToggle)}}><i class="fa-solid fa-angle-right fa-2xl"></i></button>
+                    <button onClick={() => {setSerachToggle(!searchToggle)}}><i className="fa-solid fa-angle-right fa-2xl"></i></button>
                 </div>
                 <DropDown data={'devices'} />
                 {song && dataModified ? (
