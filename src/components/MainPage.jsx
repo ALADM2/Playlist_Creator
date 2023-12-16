@@ -108,7 +108,11 @@ const MainPage = () => {
                     ) : (
                         <Input data={'songs'} artist={artist} setSong={setSong} song={song} />
                     )}
-                    <button onClick={() => {setSerachToggle(!searchToggle)}}><i className="fa-solid fa-angle-right fa-2xl"></i></button>
+                    {searchToggle === true ? (
+                        <i className='toggleOn' onClick={() => { setSerachToggle(!searchToggle) }} class="fa-solid fa-toggle-on fa-2xl"></i>
+                    ) : (
+                        <i className='toggleOff' onClick={() => { setSerachToggle(!searchToggle) }} class="fa-solid fa-toggle-off fa-2xl"></i>
+                    )}
                 </div>
                 <DropDown data={'devices'} />
                 {song && dataModified ? (
@@ -117,11 +121,11 @@ const MainPage = () => {
                     <div className='current'>
                         <label htmlFor="artist" style={{ marginBottom: 0 }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Playlist</label>
                         {playList.tracks.items.length > 0 ? (
-                        <Link to='/playlist' style={{ textDecoration: 'none' }}>
-                            <button className='currentButton' id="artist" >
-                                {playList.name}
-                            </button>
-                        </Link>
+                            <Link to='/playlist' style={{ textDecoration: 'none' }}>
+                                <button className='currentButton' id="artist" >
+                                    {playList.name}
+                                </button>
+                            </Link>
                         ) : <></>}
                     </div>
                 ) : <></>}

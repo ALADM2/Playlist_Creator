@@ -22,17 +22,18 @@
 .songDiv {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .songDiv>div{
   width: -webkit-fill-available;
 }
 
-.songDiv > button{
-  padding: 5px 0px;
+.songDiv > i{
   margin-left: 10px;
-  box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
+  margin-top: 25px;
+  color: #73BBC9;
+  font-size: 12dvw;
 }
 
 .selectMenu>button {
