@@ -18,6 +18,12 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
     let playlistId;
     let playlistData;
     genres = genres.slice(-4);
+    //Delete Rock genre(it gives too different styles)
+    genres.forEach(e => {
+        if(e === 'rock'){
+            genres.splice(genres.indexOf(e), 1)
+        }
+    });
     console.log('Artist: ' + artistName)
     try {
         // Step 1: Find recommended songs

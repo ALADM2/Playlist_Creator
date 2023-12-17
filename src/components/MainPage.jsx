@@ -97,7 +97,9 @@ const MainPage = () => {
     if (playState === 401 && token) {
         tokenContextValue.checkTokenState();
     }
-    // console.log(playState)
+    // if(artist){
+    //     console.log(artist.genres)
+    // }
     return (
         <div className='player'>
             <div className='selectMenu'>
