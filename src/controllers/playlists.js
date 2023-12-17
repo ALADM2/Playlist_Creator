@@ -17,8 +17,8 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
     let trackURIs = [firstSong];
     let playlistId;
     let playlistData;
-    genres = genres.slice(-4);
-    //Delete Rock genre(it gives too different styles)
+    genres = genres.slice(4);
+    //Delete Rock genre(it returns too different styles)
     genres.forEach(e => {
         if(e === 'rock'){
             genres.splice(genres.indexOf(e), 1)
