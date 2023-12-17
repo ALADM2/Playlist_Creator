@@ -9,6 +9,8 @@
     border-radius: 5px;
     height: fit-content;
     max-width: -webkit-fill-available;
+    min-width: 340px;
+    min-height: 330px;
 }
 
 .albumImg>img {

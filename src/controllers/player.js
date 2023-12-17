@@ -5,6 +5,9 @@ const getPlaybackState = async (token) => {
             headers: { 'Authorization': 'Bearer ' + token }
         })
 
+        if(result.status === 401){
+            return 401;
+        }
         const data = await result.json();
         return data;
     } catch (error) {

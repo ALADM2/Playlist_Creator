@@ -52,7 +52,7 @@ const Playlist = () => {
             getPlayList(await findPlaylist(token, currentSongInfo.context.uri, device))
         }
 
-        if (!playList) {
+        if (!playList && currentSongInfo) {
             newPlaylist()
         }
     }, [currentSongInfo])
@@ -79,9 +79,9 @@ const Playlist = () => {
         setIsPlaying(false);
     }
 
-    // if (!playList) {
-    //     return <Navigate to="/mainpage" />;
-    // }
+    if (!playList) {
+        tokenContextValue.checkTokenState();
+    }
 
     return (
         <>

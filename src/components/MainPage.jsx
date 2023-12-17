@@ -94,10 +94,10 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if (!TokenContext) {
-        return <Navigate to="/mainpage" />;
+    if (playState === 401) {
+        tokenContextValue.checkTokenState();
     }
-
+    // console.log(playState)
     return (
         <div className='player'>
             <div className='selectMenu'>
@@ -109,15 +109,15 @@ const MainPage = () => {
                         <Input data={'songs'} artist={artist} setSong={setSong} song={song} />
                     )}
                     {searchToggle === true ? (
-                        <i className='toggleOn' onClick={() => { setSerachToggle(!searchToggle) }} class="fa-solid fa-toggle-on fa-2xl"></i>
+                        <i onClick={() => { setSerachToggle(!searchToggle) }} className="fa-solid fa-toggle-on fa-2xl"></i>
                     ) : (
-                        <i className='toggleOff' onClick={() => { setSerachToggle(!searchToggle) }} class="fa-solid fa-toggle-off fa-2xl"></i>
+                        <i onClick={() => { setSerachToggle(!searchToggle) }} className="fa-solid fa-toggle-off fa-2xl"></i>
                     )}
                 </div>
                 <DropDown data={'devices'} />
                 {song && dataModified ? (
                     <Input data={'playlist'} artist={artist} song={song} />
-                ) : playList && !dataModified ? (
+                ) : playList ? (
                     <div className='current'>
                         <label htmlFor="artist" style={{ marginBottom: 0 }} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Playlist</label>
                         {playList.tracks.items.length > 0 ? (

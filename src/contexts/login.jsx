@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { getToken } from "../controllers/apiController";
+import { getToken, checkTokenExpired, getRefreshToken } from "../controllers/apiController";
 
 const TokenContext = createContext();
 
@@ -17,7 +17,15 @@ const TokenProvider = (props) => {
             sessionStorage.setItem('token', theToken)
         }
     }
-    console.log(token)
+
+    const checkTokenState = async () => {
+        const tokenState = await checkTokenExpired(token);
+        console.log(tokenState);
+        if(tokenState === 'Invalid'){
+            setToken(await getRefreshToken(token));
+        }
+    }
+
     useEffect(() => {
         async function findToken() {
             const theToken = await getToken(codeVerifier, code);
@@ -32,8 +40,20 @@ const TokenProvider = (props) => {
         }
     }, [code])
 
+    //Check if token is expired
+    // useEffect(() => {
+    //     async function checkTokenState(){
+    //         const tokenState = await checkTokenExpired();
+    //         console.log(tokenState);
+    //     }
+
+    //     if(token !== null){
+    //         checkTokenState();
+    //     }
+    // }, [])
+
     return (
-        <TokenContext.Provider value={{ token, findToken }}>
+        <TokenContext.Provider value={{ token, findToken, checkTokenState }}>
             {props.children}
         </TokenContext.Provider>
     )
