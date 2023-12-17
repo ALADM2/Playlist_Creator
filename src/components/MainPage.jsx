@@ -94,7 +94,7 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if (playState === 401) {
+    if (playState === 401 && token) {
         tokenContextValue.checkTokenState();
     }
     // console.log(playState)
