@@ -82,9 +82,9 @@ const checkTokenExpired = async (token) => {
             return 'Invalid';
         }
         console.log(await res.json())
-        return await res.json();
+
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 

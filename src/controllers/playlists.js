@@ -24,6 +24,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
             genres.splice(genres.indexOf(e), 1)
         }
     });
+    console.log("New playlist genres: " + genres)
     console.log('Artist: ' + artistName)
     try {
         // Step 1: Find recommended songs
