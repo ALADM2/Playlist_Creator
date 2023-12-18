@@ -2,11 +2,13 @@ import { useEffect, useState, useRef, useContext } from 'react'
 import { getDevices } from '../controllers/player';
 import { TokenContext } from '../contexts/login';
 import { DeviceContext } from '../contexts/device';
+import { useNavigate } from 'react-router-dom'
 import './CSS/Dropdown.css'
 
 const DropDown = (props) => {
     const [options, setOptions] = useState([]);
     const { saveDevice } = useContext(DeviceContext);
+    const navigate = useNavigate();
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
     const selectRef = useRef(null);
@@ -30,7 +32,13 @@ const DropDown = (props) => {
         }
     }, [token, props])
 
-    const optionsList = (options ? options.map((option, index) => (
+    // useEffect(() =>{
+    //     if(options === 401){
+    //         navigate('/');
+    //     }
+    // }, [options])
+
+    const optionsList = (options && options !== 'The access token expired' ? options.map((option, index) => (
         <option key={index}>{option.name}</option>
     )) : null)
 

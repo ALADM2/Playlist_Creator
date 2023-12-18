@@ -5,14 +5,18 @@ const getPlaybackState = async (token) => {
             headers: { 'Authorization': 'Bearer ' + token }
         })
 
-        if(result.status === 401){
-            return 401;
-        }
-        else if(result.status === 204){
+        if(result.status === 204){
             console.log("No devices found")
+            return result.status
+        }
+        const data = await result.json();
+
+        if(!result.ok){
+            if(data.error.message === 'The access token expired'){
+                return data.error.message;
+            }
         }else{
             console.log("Playback On")
-            const data = await result.json();
             return data;
         }
 
@@ -27,11 +31,20 @@ const getDevices = async (token) => {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }
         })
-
+        
         const data = await result.json();
+
+        // if(data.error.message === 'The access token expired'){
+        //     console.log("hiii")
+        //     return data.error.message;
+        // }
+        if(!result.ok){
+            return data.error.message
+        }
+
         return data.devices;
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 

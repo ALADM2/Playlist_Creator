@@ -7,7 +7,7 @@ import { TokenContext } from '../contexts/login'
 import { ListContext } from '../contexts/playlist'
 import { DeviceContext, DeviceProvider } from '../contexts/device'
 import InfoPanel from './InfoPanel'
-import { Navigate, Link } from 'react-router-dom'
+import { Navigate, Link, useNavigate } from 'react-router-dom'
 import './CSS/MainPage.css'
 
 const MainPage = () => {
@@ -24,6 +24,11 @@ const MainPage = () => {
     const { device } = useContext(DeviceContext);
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
+    const navigate = useNavigate();
+
+    // if(playState){
+    //     console.log(playState)
+    // }
 
     //Check player state
     useEffect(() => {
@@ -32,9 +37,10 @@ const MainPage = () => {
         }
         if (token) {
             findState();
-        } else {
-            tokenContextValue.findToken();
-        }
+        } 
+        // else {
+        //     tokenContextValue.findToken();
+        // }
     }, [token])
 
     //Get song data if something is playing
@@ -46,8 +52,11 @@ const MainPage = () => {
                 setPlayer(true);
             }
         }
-        if (playState) {
+        if (playState && playState !== 'The access token expired' && playState !== 204) {
             setPlayingData()
+        }else{
+            sessionStorage.removeItem('token')
+            // navigate('/');
         }
     }, [playState])
 
@@ -94,12 +103,10 @@ const MainPage = () => {
         action === 'next' ? next(token, device) : previous(token, device)
     }
 
-    if (playState === 401 && token) {
-        tokenContextValue.checkTokenState();
-    }
-    if(artist){
-        console.log(artist.genres)
-    }
+    // if (playState === 'The access token expired' && token) {
+    //     tokenContextValue.checkTokenState();
+    // }
+
     return (
         <div className='player'>
             <div className='selectMenu'>
