@@ -49,5 +49,6 @@ export const getAuth = async () => {
     const codeVerifier = generateRandomString(64);
     const hashed = await sha256(codeVerifier);
     const codeChallenge = base64encode(hashed);
+    console.log(codeVerifier)
     requestAuth(codeVerifier, codeChallenge);
 }
