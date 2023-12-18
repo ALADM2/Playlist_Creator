@@ -56,7 +56,7 @@ const getRefreshToken = async () => {
         if (res.ok) {
             console.log('Refresh Token obtained correctly.');
             const data = await res.json();
-            //sessionStorage.setItem('token', data.access_token);
+            sessionStorage.setItem('token', data.access_token);
             sessionStorage.setItem('token', data.refresh_token);
         } else {
             console.error('Failed to obtain refresh token. Status:', res.status);
