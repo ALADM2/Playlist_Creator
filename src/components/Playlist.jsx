@@ -8,6 +8,7 @@ import { getSongInfo } from '../controllers/infoController';
 import { findPlaylist } from '../controllers/playlists'
 import { playSong, pause, play } from '../controllers/player';
 import { Audio, ColorRing } from 'react-loader-spinner'
+import Backarrow from './Backarrow';
 
 const Playlist = () => {
     const [isHovering, setIsHovering] = useState(false);
@@ -43,7 +44,7 @@ const Playlist = () => {
     useEffect(() => {
         if (currentSongInfo) {
             setCurrentUri(currentSongInfo.item.uri)
-            if(currentSongInfo.is_playing === true){
+            if (currentSongInfo.is_playing === true) {
                 setIsPlaying(true);
             }
         }
@@ -87,6 +88,7 @@ const Playlist = () => {
         <>
             {playList ? (
                 <div className='listbox'>
+                    <Backarrow/>
                     <ul className='list'>
                         <h1 className='name'>{playList.name}</h1>
                         <hr className='bar'></hr>
@@ -100,17 +102,17 @@ const Playlist = () => {
                                     {isHovering && index === elementIndex && song.track.uri !== currentUri ? (
                                         <>
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
-                                            <i onClick={()=>{handlePlay(song)}} className="fa-solid fa-circle-play fa-2xl"></i>
+                                            <i onClick={() => { handlePlay(song) }} className="fa-solid fa-circle-play fa-2xl"></i>
                                         </>
                                     ) : isHovering && index === elementIndex && song.track.uri === currentUri && isPlaying ? (
                                         <>
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
-                                            <i onClick={()=>{handlePause()}} className="fa-solid fa-circle-pause fa-2xl"></i>
+                                            <i onClick={() => { handlePause() }} className="fa-solid fa-circle-pause fa-2xl"></i>
                                         </>
                                     ) : isHovering && index === elementIndex && song.track.uri === currentUri && !isPlaying ? (
                                         <>
                                             <img src={song.track.album.images[2].url} alt="" style={{ opacity: 0.3 }} />
-                                            <i onClick={()=>{play(token, device)}} className="fa-solid fa-circle-play fa-2xl"></i>
+                                            <i onClick={() => { play(token, device) }} className="fa-solid fa-circle-play fa-2xl"></i>
                                         </>
                                     ) : song.track.uri === currentUri ? (
                                         <>

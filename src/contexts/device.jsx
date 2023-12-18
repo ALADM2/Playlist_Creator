@@ -25,7 +25,7 @@ const DeviceProvider = (props) => {
             findDevice()
         }
     }, [device, token])
-    
+
     async function saveDevice(deviceId) {
         sessionStorage.setItem('device', deviceId);
         setDevice(sessionStorage.getItem('device'));

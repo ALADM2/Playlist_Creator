@@ -8,10 +8,16 @@ const getPlaybackState = async (token) => {
         if(result.status === 401){
             return 401;
         }
-        const data = await result.json();
-        return data;
+        else if(result.status === 204){
+            console.log("No devices found")
+        }else{
+            console.log("Devices found!")
+            const data = await result.json();
+            return data;
+        }
+
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 

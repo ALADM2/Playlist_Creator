@@ -26,6 +26,10 @@ const TokenProvider = (props) => {
         }
     }
 
+    // useEffect(() => {
+    //     if(token)
+    // }, [token])
+
     useEffect(() => {
         async function findToken() {
             const theToken = await getToken(codeVerifier, code);
