@@ -11,7 +11,7 @@ const getPlaybackState = async (token) => {
         else if(result.status === 204){
             console.log("No devices found")
         }else{
-            console.log("Devices found!")
+            console.log("Playback On")
             const data = await result.json();
             return data;
         }
