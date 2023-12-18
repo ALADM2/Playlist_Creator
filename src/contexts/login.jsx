@@ -7,6 +7,7 @@ const TokenContext = createContext();
 const TokenProvider = (props) => {
     const [token, setToken] = useState(sessionStorage.getItem('token') || null);
     let codeVerifier = localStorage.getItem('code_verifier');
+    //console.log(codeVerifier)
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get('code');
 

@@ -7,6 +7,7 @@
     transition: opacity 0.3s ease-in-out; /* Add a transition effect */
     cursor: pointer;
     color: #73BBC9;
+    font-size:x-large;
 }
 
 .backArrow.visible {
