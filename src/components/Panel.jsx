@@ -1,8 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { TokenContext } from '../contexts/login'
+import { DeviceContext, DeviceProvider } from '../contexts/device'
 import { play, pause, next, previous } from '../controllers/player'
 import './CSS/Panel.css'
 
 const Panel = (props) => {
+    const tokenContextValue = useContext(TokenContext);
+    const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
+    const { device } = useContext(DeviceContext);
 
     function handleResume() {
         if (device) {
