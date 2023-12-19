@@ -24,7 +24,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background: #fff;
-    z-index: 1;  
+    z-index: 1001;  
 }
 
 .inputDiv>div>ul::-webkit-scrollbar{

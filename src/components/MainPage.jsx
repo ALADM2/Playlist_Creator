@@ -137,7 +137,7 @@ const MainPage = () => {
                                 START CURRENT PLAYLIST
                             </button>
                         ) : <></>}
-                        <Panel setPlayer={setPlayer} setPlaying={setPlaying}></Panel>
+                        <Panel setPlayer={setPlayer} setPlaying={setPlaying} playing={playing}></Panel>
                     </div>
                     {player ? (
                         <InfoPanel token={token} device={device} />
