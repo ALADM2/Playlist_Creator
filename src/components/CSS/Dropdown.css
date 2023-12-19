@@ -18,3 +18,30 @@
     box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
     letter-spacing: 3px;
 }
+
+.dropdown{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.dropdown>div{
+    display: flex;
+    width: -webkit-fill-available;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spoty{
+    width: fit-content;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 0px 0px rgba(115, 187, 201, 1);
+}
+
+.spoty>i{
+    padding: 20px;
+}
