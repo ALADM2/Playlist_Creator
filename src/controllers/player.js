@@ -41,7 +41,6 @@ const getDevices = async (token) => {
         if(!result.ok){
             return data.error.message
         }
-
         return data.devices;
     } catch (error) {
         console.log(error)

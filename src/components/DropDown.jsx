@@ -11,7 +11,7 @@ const DropDown = (props) => {
     const [options, setOptions] = useState([]);
     const [spotyClicked, setSpotyClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const { saveDevice } = useContext(DeviceContext);
+    const { saveDevice, deviceName } = useContext(DeviceContext);
     const navigate = useNavigate();
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
@@ -61,7 +61,7 @@ const DropDown = (props) => {
                     props.setSong(option.uri);
                 }
                 if (props.data === 'devices') {
-                    saveDevice(option.id);
+                    saveDevice(option.id, option.name);
                 }
             }
         })
@@ -71,7 +71,12 @@ const DropDown = (props) => {
         <div className='dropdown'>
             <div>
                 <label htmlFor="options" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    {props.data == 'topSongs' ? 'Select first song for the playlist' : 'Select device'}
+                    {props.data == 'topSongs' ? 'Select first song for the playlist'
+                        : (
+                            <>
+                                {deviceName ? (<><p>Device selected:</p><p style={{ color: '#73BBC9' }}>{deviceName}</p></>) : <p>Select device</p>}
+                            </>
+                        )}
                 </label>
                 {!isLoading ? (
                     <select ref={selectRef} onChange={handleSelect} id="options" className="bg-gray-50 border border-gray-300 text-gray-900 

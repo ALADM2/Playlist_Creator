@@ -33,6 +33,11 @@
     justify-content: center;
 }
 
+.dropdown>div>label{
+    display: flex;
+    gap: 10p
+}
+
 .spoty{
     width: fit-content;
     margin-left: 10px;

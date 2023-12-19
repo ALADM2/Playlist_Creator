@@ -8,6 +8,7 @@ const DeviceContext = createContext();
 // Provides components with login state
 const DeviceProvider = (props) => {
     const [device, setDevice] = useState();
+    const [deviceName, setDeviceName] = useState();
     const navigate = useNavigate();
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
@@ -32,13 +33,15 @@ const DeviceProvider = (props) => {
         }
     }, [device, token])
 
-    async function saveDevice(deviceId) {
+    async function saveDevice(deviceId, deviceName) {
         sessionStorage.setItem('device', deviceId);
+        sessionStorage.setItem('deviceName', deviceName);
         setDevice(sessionStorage.getItem('device'));
+        setDeviceName(sessionStorage.getItem('deviceName'));
     }
 
     return (
-        <DeviceContext.Provider value={{ device, saveDevice }}>
+        <DeviceContext.Provider value={{ device, deviceName, saveDevice }}>
             {props.children}
         </DeviceContext.Provider>
     )
