@@ -54,10 +54,11 @@ const MainPage = () => {
         }
         if (playState && playState !== 'The access token expired' && playState !== 204) {
             setPlayingData()
-        }else{
-            sessionStorage.removeItem('token')
-            // navigate('/');
         }
+        // else{
+        //     sessionStorage.removeItem('token')
+        //     /navigate('/');
+        // }
     }, [playState])
 
     //If artist is modified

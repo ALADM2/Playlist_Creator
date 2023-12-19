@@ -78,10 +78,12 @@ const checkTokenExpired = async (token) => {
             },
         })
 
-        if (!res.ok) {
-            return 'Invalid';
-        }
-        console.log(await res.json())
+        const data = await res.json();
+        console.log(data);
+        // if (!res.ok) {
+        //     return 'Invalid';
+        // }
+        //console.log(await res.json())
 
     } catch (error) {
         console.log(error)

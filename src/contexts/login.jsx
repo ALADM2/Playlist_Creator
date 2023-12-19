@@ -22,7 +22,7 @@ const TokenProvider = (props) => {
         const tokenState = await checkTokenExpired(token);
         console.log(tokenState);
         if (tokenState === 'Invalid') {
-            setToken(null);
+            setToken(sessionStorage.getItem('refresh_token'));
         }
     }
 
@@ -47,7 +47,7 @@ const TokenProvider = (props) => {
     //Check if token is expired
     // useEffect(() => {
     //     async function checkTokenState(){
-    //         const tokenState = await checkTokenExpired();
+    //         const tokenState = await checkTokenExpired(token);
     //         console.log(tokenState);
     //     }
 
@@ -56,6 +56,7 @@ const TokenProvider = (props) => {
     //     }
     // }, [])
     console.log(token)
+    console.log(sessionStorage)
 
     return (
         <TokenContext.Provider value={{ token, findToken, checkTokenState }}>
