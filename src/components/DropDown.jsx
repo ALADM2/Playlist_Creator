@@ -29,8 +29,8 @@ const DropDown = (props) => {
             }
             if (props.data === 'devices') {
                 async function findDevices() {
-                    setIsLoading(true);
                     if (spotyClicked) {
+                        setIsLoading(true);
                         await new Promise((resolve) => setTimeout(resolve, 7000));
                         setOptions(await getDevices(token));
                     } else {
