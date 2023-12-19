@@ -31,7 +31,7 @@ const getDevices = async (token) => {
         const data = await result.json();
         return data.devices;
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -53,7 +53,7 @@ const play = async (token, device) => {
         }
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -81,7 +81,7 @@ const playSong = async (token, playlistURI, songUri, device) => {
         }
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -106,7 +106,7 @@ const playPlaylist = async (token, playlistURI, device) => {
         }
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -121,7 +121,7 @@ const pause = async (token, device) => {
         })
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -136,7 +136,7 @@ const next = async (token, device) => {
         })
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -151,7 +151,7 @@ const previous = async (token, device) => {
         })
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 

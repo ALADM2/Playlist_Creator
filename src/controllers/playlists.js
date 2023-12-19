@@ -9,7 +9,7 @@ const getPlaylistByGenre = async (token, genreID) => {
         const data = await result.json();
         return data.playlists.items;
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -39,7 +39,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
         trackURIs = trackURIs.concat(tracks);
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 
     try {
@@ -61,7 +61,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
         playlistId = await playlistData.id;
 
     } catch (error) {
-        console.log(error.response)
+        console.log(error)
     }
 
     try {
@@ -86,7 +86,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
 
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 
     try {
@@ -109,7 +109,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
 
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 
 }
@@ -125,7 +125,7 @@ const findPlaylist = async (token, uri) => {
         const data = await result.json();
         return data;
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 

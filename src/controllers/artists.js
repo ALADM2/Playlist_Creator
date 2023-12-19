@@ -43,7 +43,7 @@ const getArtists = async (token, artistName) => {
         }
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -63,7 +63,7 @@ const getSongs = async (token, songName) => {
         }
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 
@@ -83,7 +83,7 @@ const getTopSongs = async (token, artistID) => {
         }
 
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 }
 

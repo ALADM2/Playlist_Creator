@@ -98,7 +98,7 @@ const getGenres = async (token) => {
         const data = await result.json();
         return data.categories.items;
     } catch (error) {
-        console.log(error.response.data)
+        console.log(error)
     }
 
 }
