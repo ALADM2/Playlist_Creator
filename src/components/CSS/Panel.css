@@ -30,7 +30,7 @@
 
 @media (max-width: 900px) {
     .panel {
-        margin-top: -12px;
+        /* margin-top: -12px; */
         padding: 5px;
         position: sticky;
         z-index: 1000;
