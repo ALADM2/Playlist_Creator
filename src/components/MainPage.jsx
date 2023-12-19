@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import DropDown from './DropDown'
 import Input from './Input'
+import Panel from './Panel'
 import { playPlaylist, pause, next, previous, getPlaybackState, play } from '../controllers/player'
 import { findPlaylist } from '../controllers/playlists'
 import { TokenContext } from '../contexts/login'
@@ -81,28 +82,28 @@ const MainPage = () => {
         setPlayButton(false);
     }
 
-    function handleResume() {
-        if (device) {
-            play(token, device)
-            setPlayer(true);
-            setPlaying(true);
-        } else {
-            alert("Please, select a device")
-        }
-    }
+    // function handleResume() {
+    //     if (device) {
+    //         play(token, device)
+    //         setPlayer(true);
+    //         setPlaying(true);
+    //     } else {
+    //         alert("Please, select a device")
+    //     }
+    // }
 
-    function handlePause() {
-        if (device) {
-            pause(token, device);
-            setPlaying(false);
-        } else {
-            alert("Please, select a device")
-        }
-    }
+    // function handlePause() {
+    //     if (device) {
+    //         pause(token, device);
+    //         setPlaying(false);
+    //     } else {
+    //         alert("Please, select a device")
+    //     }
+    // }
 
-    function handleSkip(action) {
-        action === 'next' ? next(token, device) : previous(token, device)
-    }
+    // function handleSkip(action) {
+    //     action === 'next' ? next(token, device) : previous(token, device)
+    // }
 
     // if (playState === 'The access token expired' && token) {
     //     tokenContextValue.checkTokenState();
@@ -144,17 +145,7 @@ const MainPage = () => {
                         START CURRENT PLAYLIST
                     </button>
                 ) : <></>}
-                <div className='panel'>
-                    <div className='nextPrev'>
-                        <i onClick={() => { handleSkip('prev') }} className="fa-solid fa-backward-step fa-2xl"></i>
-                        {playing ? (
-                            <i onClick={handlePause} className="fa-solid fa-circle-pause fa-2xl"></i>
-                        ) : (
-                            <i onClick={handleResume} className="fa-solid fa-circle-play fa-2xl"></i>
-                        )}
-                        <i onClick={() => { handleSkip('next') }} className="fa-solid fa-forward-step fa-2xl"></i>
-                    </div>
-                </div>
+                <Panel setPlayer={setPlayer} setPlaying={setPlaying}></Panel>
             </div>
             {player ? (
                 <InfoPanel token={token} device={device} />
