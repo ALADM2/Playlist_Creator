@@ -14,7 +14,7 @@
     opacity: 0.7;
 }
 
-.backArrow.visible:active {
+.backArrow.visible:hover {
     opacity: 1;
     color: blue;
 }

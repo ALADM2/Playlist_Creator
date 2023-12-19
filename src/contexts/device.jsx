@@ -1,13 +1,14 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import { getPlaybackState } from "../controllers/player";
 import { TokenContext } from '../contexts/login'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const DeviceContext = createContext();
 
 // Provides components with login state
 const DeviceProvider = (props) => {
     const [device, setDevice] = useState();
+    const navigate = useNavigate();
     const tokenContextValue = useContext(TokenContext);
     const token = tokenContextValue.token !== 400 ? tokenContextValue.token : sessionStorage.getItem('token');
 
@@ -15,13 +16,18 @@ const DeviceProvider = (props) => {
         async function findDevice(){
             try{          
                 const data = await getPlaybackState(token);
-                setDevice(data.device.id);
+                // if(data === 204 && device){
+                //     navigate('/');
+                // }
+                if(device){
+                    setDevice(data.device.id);
+                }
             } catch(error){
                 console.log(error)
             }
         }
         
-        if(!device && token){
+        if(token){
             findDevice()
         }
     }, [device, token])

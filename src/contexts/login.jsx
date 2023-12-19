@@ -7,14 +7,13 @@ const TokenContext = createContext();
 const TokenProvider = (props) => {
     const [token, setToken] = useState(sessionStorage.getItem('token') || null);
     let codeVerifier = localStorage.getItem('code_verifier');
-    //console.log(codeVerifier)
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get('code');
 
     const findToken = async () => {
         const theToken = await getToken(codeVerifier, code);
         setToken(theToken);
-        if(theToken !== 400){
+        if (theToken !== 400) {
             sessionStorage.setItem('token', theToken)
         }
     }
@@ -22,8 +21,8 @@ const TokenProvider = (props) => {
     const checkTokenState = async () => {
         const tokenState = await checkTokenExpired(token);
         console.log(tokenState);
-        if(tokenState === 'Invalid'){
-            setToken(await getRefreshToken(token));
+        if (tokenState === 'Invalid') {
+            setToken(null);
         }
     }
 
@@ -35,7 +34,7 @@ const TokenProvider = (props) => {
         async function findToken() {
             const theToken = await getToken(codeVerifier, code);
             setToken(theToken);
-            if(theToken !== 400){
+            if (theToken !== 400) {
                 sessionStorage.setItem('token', theToken)
             }
         }
@@ -56,6 +55,7 @@ const TokenProvider = (props) => {
     //         checkTokenState();
     //     }
     // }, [])
+    console.log(token)
 
     return (
         <TokenContext.Provider value={{ token, findToken, checkTokenState }}>

@@ -8,6 +8,7 @@ import { getSongInfo } from '../controllers/infoController';
 import { findPlaylist } from '../controllers/playlists'
 import { playSong, pause, play } from '../controllers/player';
 import { Audio, ColorRing } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
 import Backarrow from './Backarrow';
 
 const Playlist = () => {
@@ -16,6 +17,7 @@ const Playlist = () => {
     const [elementIndex, setElementIndex] = useState();
     const [currentSongInfo, setCurrentSongInfo] = useState(); //Current song data
     const [currentUri, setCurrentUri] = useState();
+    const navigate = useNavigate();
     const { getPlayList, playList } = useContext(ListContext);
     const deviceContextValue = useContext(DeviceContext);
     const device = deviceContextValue.device ? deviceContextValue.device : sessionStorage.getItem('device')
@@ -43,6 +45,9 @@ const Playlist = () => {
 
     useEffect(() => {
         if (currentSongInfo) {
+            if (currentSongInfo === 'The access token expired'){
+                navigate('/')
+            }
             setCurrentUri(currentSongInfo.item.uri)
             if (currentSongInfo.is_playing === true) {
                 setIsPlaying(true);
