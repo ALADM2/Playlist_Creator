@@ -77,16 +77,19 @@ const checkTokenExpired = async (token) => {
                 'Authorization': 'Bearer ' + token,
             },
         })
-
-        const data = await res.json();
-        console.log(data);
-        // if (!res.ok) {
-        //     return 'Invalid';
-        // }
-        //console.log(await res.json())
-
+        console.log(res.status);
+        if(res.status === 401){
+            return res.status
+        }
     } catch (error) {
-        console.log(error)
+        // If the request fails, it may be due to an expired token
+        if (error.response && error.response.status === 401) {
+            console.log('Token has expired.');
+            return res.status
+
+        } else {
+            console.error('Error checking token validity:', error.message);
+        }
     }
 }
 

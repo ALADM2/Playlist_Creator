@@ -29,6 +29,7 @@ const createPlaylist = async (token, genres, artistName, artistId, firstSong) =>
     try {
         // Step 1: Find recommended songs
         const genresArray = genres.join(',');
+        console.log(genresArray)
         const result = await fetch(`https://api.spotify.com/v1/recommendations?seed_genres=${genresArray}&seed_artists=${artistId}`, {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token }

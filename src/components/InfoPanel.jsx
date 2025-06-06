@@ -12,10 +12,12 @@ const InfoPanel = (props) => {
     useEffect(() => {
         const findInfo = async () => {
             const response = await getSongInfo(props.token, props.device)
-            if (!songInfo || response.item.id !== songInfo.item.id) {
-                console.log('Track has changed:', response.item.name);
-                // Do something when the track changes
-                setSongInfo(response);
+            if(response){
+                if (!songInfo || response.item.id !== songInfo.item.id) {
+                    console.log('Current track:', response.item.name);
+                    // Do something when the track changes
+                    setSongInfo(response);
+                }
             }
         }
         if (props.device) {
@@ -30,6 +32,12 @@ const InfoPanel = (props) => {
     }, [props])
 
     useEffect(() => {
+        if(songInfo === 401){
+            console.log("Aqui estamos panel")
+            sessionStorage.removeItem('token')
+            navigate('/');
+        }
+
         if (songInfo && !songInfo.error) {
             setTrackName(songInfo.item.name)
             const artistArray = songInfo.item.artists.map(artist => artist.name).join(', ')

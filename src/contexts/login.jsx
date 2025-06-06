@@ -1,11 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getToken, checkTokenExpired, getRefreshToken } from "../controllers/apiController";
+import { Navigate } from "react-router-dom";
 
 const TokenContext = createContext();
 
 // Provides components with login state
 const TokenProvider = (props) => {
     const [token, setToken] = useState(sessionStorage.getItem('token') || null);
+    const [tokenStatus, setTokenStatus] = useState();
     let codeVerifier = localStorage.getItem('code_verifier');
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get('code');
@@ -44,19 +46,28 @@ const TokenProvider = (props) => {
         }
     }, [code])
 
-    //Check if token is expired
-    // useEffect(() => {
-    //     async function checkTokenState(){
-    //         const tokenState = await checkTokenExpired(token);
-    //         console.log(tokenState);
-    //     }
+    useEffect(() => {
+        async function checkToken() {
+            setTokenStatus(await checkTokenExpired(token));
+        }
 
-    //     if(token !== null){
-    //         checkTokenState();
-    //     }
-    // }, [])
+        // Check currently playing track every 5 seconds
+        const intervalId = setInterval(checkToken, 300000);
+
+        // Cleanup the interval on component unmount
+        return () => clearInterval(intervalId);
+    }, [token])
+
+    useEffect(() => {
+        if(tokenStatus === 401){
+            console.log("Aqui estamos en login.jsx")
+            sessionStorage.removeItem('token')
+            // return <Navigate to="/" />
+            window.location.reload();
+        }
+    }, [tokenStatus])
+
     console.log(token)
-    console.log(sessionStorage)
 
     return (
         <TokenContext.Provider value={{ token, findToken, checkTokenState }}>

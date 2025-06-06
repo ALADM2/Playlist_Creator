@@ -5,8 +5,13 @@ const getPlaybackState = async (token) => {
             headers: { 'Authorization': 'Bearer ' + token }
         })
 
+        if(result.status === 401){
+            console.log("Token not valid")
+            return result.status
+        }
+
         if(result.status === 204){
-            console.log("No devices found")
+            console.log("No playback found")
             return result.status
         }
         const data = await result.json();

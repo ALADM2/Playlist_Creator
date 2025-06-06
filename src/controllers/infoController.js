@@ -6,8 +6,12 @@ const getSongInfo = async (token) => {
                 'Authorization': 'Bearer ' + token,
             },
         })
+        // console.log(result.status)
+        if (result.status === 401){
+            return result.status
+        }
+        
         const data = await result.json();
-
         if(result.ok){
             return data;
         } else {
@@ -15,7 +19,7 @@ const getSongInfo = async (token) => {
         }
 
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 }
 
